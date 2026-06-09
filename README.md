@@ -2,6 +2,8 @@
 
 Site d'exercices pour apprendre l'hébreu à l'oral : cartes à retourner (vocabulaire, entretien dev, conjugaison au présent).
 
+**Site en ligne :** [https://praticeyourhebrew.vercel.app](https://praticeyourhebrew.vercel.app)
+
 ## Lancer en local
 
 ```bash
