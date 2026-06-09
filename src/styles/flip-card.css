@@ -1,0 +1,102 @@
+﻿.flip-card {
+  width: min(90vw, 420px);
+  height: 280px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  border: 2px solid #3b6ea5;
+}
+
+.flip-card-back {
+  border: 2px solid #2d6a4f;
+  transform: rotateY(180deg);
+}
+
+.flip-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7c93;
+}
+
+.flip-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.flip-card-badge {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #e8eef5;
+  color: #3b6ea5;
+  border-radius: 999px;
+}
+
+.flip-card-french {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: center;
+}
+
+.flip-card-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7c93;
+  text-align: center;
+}
+
+.flip-card-hebrew {
+  margin: 0;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.flip-card-transcription {
+  margin: 0;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #6b7c93;
+  text-align: center;
+}
