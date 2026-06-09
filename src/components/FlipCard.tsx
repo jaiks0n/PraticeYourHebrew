@@ -1,12 +1,10 @@
-﻿import { useRef, useState } from 'react'
-import type { VocabularyEntry } from '../data/types'
+﻿import type { VocabularyEntry } from '../data/types'
 import '../styles/flip-card.css'
 
 interface FlipCardProps {
   entry: VocabularyEntry
   isFlipped: boolean
   onFlip: () => void
-  audioFolder?: string
 }
 
 const TENSE_LABELS: Record<string, string> = {
@@ -15,54 +13,11 @@ const TENSE_LABELS: Record<string, string> = {
   future: 'Futur',
 }
 
-const AUDIO_EXTENSIONS = ['mp3', 'mp4'] as const
-
-function getAudioUrls(audioFolder: string, entryId: string) {
-  return AUDIO_EXTENSIONS.map((ext) => `/audio/${audioFolder}/${entryId}.${ext}`)
-}
-
-export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProps) {
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const audioIndexRef = useRef(0)
-  const [audioError, setAudioError] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
-
+export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
   const isConjugation = Boolean(entry.tense)
   const hint = isConjugation
     ? 'Conjuguez à voix haute, puis cliquez'
     : 'Dites le mot à voix haute, puis cliquez'
-
-  const audioUrls = audioFolder ? getAudioUrls(audioFolder, entry.id) : []
-
-  const handlePlayAudio = (event: React.MouseEvent) => {
-    event.stopPropagation()
-    if (!audioRef.current || audioUrls.length === 0) return
-
-    setAudioError(false)
-    setIsPlaying(false)
-    audioIndexRef.current = 0
-    audioRef.current.src = audioUrls[0]
-    audioRef.current.currentTime = 0
-    audioRef.current.play().catch(() => setAudioError(true))
-  }
-
-  const handleAudioEnded = () => setIsPlaying(false)
-  const handleAudioPlay = () => setIsPlaying(true)
-  const handleAudioError = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const nextIndex = audioIndexRef.current + 1
-    if (nextIndex < audioUrls.length) {
-      audioIndexRef.current = nextIndex
-      audio.src = audioUrls[nextIndex]
-      audio.play().catch(() => setAudioError(true))
-      return
-    }
-
-    setIsPlaying(false)
-    setAudioError(true)
-  }
 
   return (
     <button
@@ -93,28 +48,6 @@ export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProp
             {entry.hebrew}
           </p>
           <p className="flip-card-transcription">{entry.transcription}</p>
-          {audioUrls.length > 0 && (
-            <>
-              <button
-                type="button"
-                className="flip-card-audio-btn"
-                onClick={handlePlayAudio}
-                aria-label="Écouter la prononciation"
-              >
-                {isPlaying ? 'Lecture...' : 'Écouter'}
-              </button>
-              {audioError && (
-                <span className="flip-card-audio-error">Audio non disponible</span>
-              )}
-              <audio
-                ref={audioRef}
-                preload="none"
-                onEnded={handleAudioEnded}
-                onPlay={handleAudioPlay}
-                onError={handleAudioError}
-              />
-            </>
-          )}
         </div>
       </div>
     </button>

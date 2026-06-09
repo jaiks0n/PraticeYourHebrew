@@ -5,7 +5,6 @@ import { FlipCard } from './FlipCard'
 interface FlashcardExerciseProps {
   cards: VocabularyEntry[]
   title?: string
-  audioFolder?: string
 }
 
 // Doit correspondre à la durée dans flip-card.css (0.5s)
@@ -20,7 +19,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled
 }
 
-export function FlashcardExercise({ cards: sourceCards, title, audioFolder }: FlashcardExerciseProps) {
+export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerciseProps) {
   const [cards, setCards] = useState(sourceCards)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
@@ -116,7 +115,6 @@ export function FlashcardExercise({ cards: sourceCards, title, audioFolder }: Fl
         entry={currentCard}
         isFlipped={isFlipped}
         onFlip={() => !isNavigating && setIsFlipped((flipped) => !flipped)}
-        audioFolder={audioFolder}
       />
 
       <div className="exercise-controls">

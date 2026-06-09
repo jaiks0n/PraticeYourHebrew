@@ -15,7 +15,6 @@ const exercises = [
     description: 'Salutations, nombres, mots du quotidien',
     cards: vocabulary,
     title: 'Vocabulaire général',
-    audioFolder: 'general',
   },
   {
     id: 'flashcards-dev-interview' as const,
@@ -24,7 +23,6 @@ const exercises = [
     description: 'Vocabulaire IT et questions d\'entretien en startup/tech',
     cards: devInterviewVocabulary,
     title: 'Entretien d\'embauche — Développeur',
-    audioFolder: 'dev-interview',
   },
   {
     id: 'flashcards-conjugation' as const,
@@ -33,7 +31,6 @@ const exercises = [
     description: 'Conjuguez à voix haute : je travaille, il parle, j\'ai...',
     cards: conjugationPresent,
     title: 'Conjugaison — Présent',
-    audioFolder: 'conjugation',
   },
 ]
 
@@ -71,7 +68,6 @@ function App() {
           key={activeExercise.id}
           cards={activeExercise.cards}
           title={activeExercise.title}
-          audioFolder={activeExercise.audioFolder}
         />
       ) : null}
     </Layout>

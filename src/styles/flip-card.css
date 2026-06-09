@@ -100,25 +100,3 @@
   color: #6b7c93;
   text-align: center;
 }
-
-.flip-card-audio-btn {
-  margin-top: 0.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #2d6a4f;
-  background: #e8f5ee;
-  border: 1px solid #b8dfc8;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.flip-card-audio-btn:hover {
-  background: #d4edda;
-}
-
-.flip-card-audio-error {
-  font-size: 0.75rem;
-  color: #9aa8b8;
-}

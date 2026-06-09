@@ -52,16 +52,6 @@ git push
 
 Vercel redéploie automatiquement si le projet est lié à GitHub.
 
-## Audio (prononciation)
-
-Placez vos MP3 dans `public/audio/` :
-
-- `public/audio/general/1.mp3` — id de la carte dans `vocabulary.ts`
-- `public/audio/dev-interview/42.mp3` — id dans `vocabulary-dev-interview.ts`
-- `public/audio/conjugation/5.mp3` — id dans `conjugation-present.ts`
-
-Au verso de la carte, le bouton **Écouter** lit le fichier. Sans MP3 : message « Audio non disponible ».
-
 ## Structure des données
 
 | Fichier | Contenu |
