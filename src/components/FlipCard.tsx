@@ -15,12 +15,15 @@ const TENSE_LABELS: Record<string, string> = {
   future: 'Futur',
 }
 
-function getAudioUrl(audioFolder: string, entryId: string) {
-  return `/audio/${audioFolder}/${entryId}.mp3`
+const AUDIO_EXTENSIONS = ['mp3', 'mp4'] as const
+
+function getAudioUrls(audioFolder: string, entryId: string) {
+  return AUDIO_EXTENSIONS.map((ext) => `/audio/${audioFolder}/${entryId}.${ext}`)
 }
 
 export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
+  const audioIndexRef = useRef(0)
   const [audioError, setAudioError] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -29,13 +32,16 @@ export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProp
     ? 'Conjuguez à voix haute, puis cliquez'
     : 'Dites le mot à voix haute, puis cliquez'
 
-  const audioUrl = audioFolder ? getAudioUrl(audioFolder, entry.id) : null
+  const audioUrls = audioFolder ? getAudioUrls(audioFolder, entry.id) : []
 
   const handlePlayAudio = (event: React.MouseEvent) => {
     event.stopPropagation()
-    if (!audioRef.current) return
+    if (!audioRef.current || audioUrls.length === 0) return
 
     setAudioError(false)
+    setIsPlaying(false)
+    audioIndexRef.current = 0
+    audioRef.current.src = audioUrls[0]
     audioRef.current.currentTime = 0
     audioRef.current.play().catch(() => setAudioError(true))
   }
@@ -43,6 +49,17 @@ export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProp
   const handleAudioEnded = () => setIsPlaying(false)
   const handleAudioPlay = () => setIsPlaying(true)
   const handleAudioError = () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const nextIndex = audioIndexRef.current + 1
+    if (nextIndex < audioUrls.length) {
+      audioIndexRef.current = nextIndex
+      audio.src = audioUrls[nextIndex]
+      audio.play().catch(() => setAudioError(true))
+      return
+    }
+
     setIsPlaying(false)
     setAudioError(true)
   }
@@ -76,7 +93,7 @@ export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProp
             {entry.hebrew}
           </p>
           <p className="flip-card-transcription">{entry.transcription}</p>
-          {audioUrl && (
+          {audioUrls.length > 0 && (
             <>
               <button
                 type="button"
@@ -91,7 +108,6 @@ export function FlipCard({ entry, isFlipped, onFlip, audioFolder }: FlipCardProp
               )}
               <audio
                 ref={audioRef}
-                src={audioUrl}
                 preload="none"
                 onEnded={handleAudioEnded}
                 onPlay={handleAudioPlay}
