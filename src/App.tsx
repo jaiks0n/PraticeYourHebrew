@@ -1,13 +1,20 @@
 ﻿import { useState } from 'react'
 import { FlashcardExercise } from './components/FlashcardExercise'
+import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
 import { conjugationPresent } from './data/conjugation-present'
+import { nounGenderVocabulary } from './data/vocabulary-noun-gender'
 import { vocabulary } from './data/vocabulary'
 import { devInterviewVocabulary } from './data/vocabulary-dev-interview'
 
-type Page = 'home' | 'flashcards-general' | 'flashcards-dev-interview' | 'flashcards-conjugation'
+type Page =
+  | 'home'
+  | 'flashcards-general'
+  | 'flashcards-dev-interview'
+  | 'flashcards-conjugation'
+  | 'gender-quiz'
 
-const exercises = [
+const flashcardExercises = [
   {
     id: 'flashcards-general' as const,
     icon: '🃏',
@@ -34,10 +41,36 @@ const exercises = [
   },
 ]
 
+const genderQuizExercise = {
+  id: 'gender-quiz' as const,
+  icon: '⚖️',
+  name: 'Genre des noms — Quiz',
+  description: '10 mots aléatoires : masculin ou féminin ?',
+  wordCount: nounGenderVocabulary.length,
+  title: 'Genre des noms — Quiz',
+}
+
+const homeExercises = [
+  ...flashcardExercises.map((ex) => ({
+    id: ex.id,
+    icon: ex.icon,
+    name: ex.name,
+    description: ex.description,
+    countLabel: `${ex.cards.length} cartes`,
+  })),
+  {
+    id: genderQuizExercise.id,
+    icon: genderQuizExercise.icon,
+    name: genderQuizExercise.name,
+    description: genderQuizExercise.description,
+    countLabel: `Quiz de 10 · ${genderQuizExercise.wordCount} mots`,
+  },
+]
+
 function App() {
   const [page, setPage] = useState<Page>('home')
 
-  const activeExercise = exercises.find((exercise) => exercise.id === page)
+  const activeFlashcard = flashcardExercises.find((exercise) => exercise.id === page)
 
   return (
     <Layout
@@ -48,7 +81,7 @@ function App() {
         <div className="home">
           <h2 className="home-title">Choisissez un exercice</h2>
           <div className="exercise-list">
-            {exercises.map((exercise) => (
+            {homeExercises.map((exercise) => (
               <button
                 key={exercise.id}
                 type="button"
@@ -58,16 +91,22 @@ function App() {
                 <span className="exercise-card-icon">{exercise.icon}</span>
                 <span className="exercise-card-name">{exercise.name}</span>
                 <span className="exercise-card-desc">{exercise.description}</span>
-                <span className="exercise-card-count">{exercise.cards.length} cartes</span>
+                <span className="exercise-card-count">{exercise.countLabel}</span>
               </button>
             ))}
           </div>
         </div>
-      ) : activeExercise ? (
+      ) : page === 'gender-quiz' ? (
+        <GenderQuizExercise
+          key="gender-quiz"
+          words={nounGenderVocabulary}
+          title={genderQuizExercise.title}
+        />
+      ) : activeFlashcard ? (
         <FlashcardExercise
-          key={activeExercise.id}
-          cards={activeExercise.cards}
-          title={activeExercise.title}
+          key={activeFlashcard.id}
+          cards={activeFlashcard.cards}
+          title={activeFlashcard.title}
         />
       ) : null}
     </Layout>

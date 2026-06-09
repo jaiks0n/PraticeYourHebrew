@@ -1,0 +1,159 @@
+.gender-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.gender-quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(90vw, 420px);
+  min-height: 220px;
+  padding: 2rem;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid #3b6ea5;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+}
+
+.gender-quiz-hebrew {
+  margin: 0;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.gender-quiz-transcription {
+  margin: 0;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #6b7c93;
+}
+
+.gender-quiz-french {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e3a5f;
+  text-align: center;
+}
+
+.gender-quiz-feedback {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.gender-quiz-feedback.correct {
+  color: #2d6a4f;
+}
+
+.gender-quiz-feedback.incorrect {
+  color: #c0392b;
+}
+
+.gender-quiz-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gender-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.gender-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.gender-btn:disabled {
+  cursor: default;
+}
+
+.gender-btn-masc {
+  background: #e8eef5;
+  color: #1e3a5f;
+  border-color: #3b6ea5;
+}
+
+.gender-btn-masc:hover:not(:disabled) {
+  background: #d0dae8;
+}
+
+.gender-btn-fem {
+  background: #f5e8f0;
+  color: #5a2d4f;
+  border-color: #9b6b8f;
+}
+
+.gender-btn-fem:hover:not(:disabled) {
+  background: #edd8e8;
+}
+
+.gender-btn.correct {
+  background: #d4edda;
+  border-color: #2d6a4f;
+  color: #2d6a4f;
+}
+
+.gender-btn.incorrect {
+  background: #f8d7da;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.gender-btn.neutral-disabled {
+  opacity: 0.4;
+}
+
+.gender-quiz-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.gender-quiz-result-score {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e3a5f;
+}
+
+.gender-quiz-result-message {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #6b7c93;
+}
+
+.gender-quiz-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gender-quiz-stat {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3b4f6b;
+}

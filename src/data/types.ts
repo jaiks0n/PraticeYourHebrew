@@ -12,3 +12,14 @@ export interface VocabularyEntry {
 export interface ConjugationEntry extends VocabularyEntry {
   tense: 'present'
 }
+
+export type NounGender = 'masculine' | 'feminine'
+
+export interface NounGenderEntry {
+  id: string
+  hebrew: string
+  transcription: string
+  french: string
+  gender: NounGender
+  category?: string
+}
