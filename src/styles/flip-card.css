@@ -76,13 +76,6 @@
   text-align: center;
 }
 
-.flip-card-hint {
-  margin: 0;
-  font-size: 0.875rem;
-  color: #6b7c93;
-  text-align: center;
-}
-
 .flip-card-hebrew {
   margin: 0;
   font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;

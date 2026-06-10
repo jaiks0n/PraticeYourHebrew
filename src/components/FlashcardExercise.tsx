@@ -106,9 +106,6 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
         <p className="exercise-counter">
           {currentIndex + 1} / {cards.length}
         </p>
-        {currentCard.category && (
-          <span className="exercise-category">{currentCard.category}</span>
-        )}
       </div>
 
       <FlipCard

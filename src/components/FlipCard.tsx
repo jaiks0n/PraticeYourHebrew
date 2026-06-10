@@ -14,11 +14,6 @@ const TENSE_LABELS: Record<string, string> = {
 }
 
 export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
-  const isConjugation = Boolean(entry.tense)
-  const hint = isConjugation
-    ? 'Conjuguez à voix haute, puis cliquez'
-    : 'Dites le mot à voix haute, puis cliquez'
-
   return (
     <button
       type="button"
@@ -40,7 +35,6 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
             </div>
           )}
           <p className="flip-card-french">{entry.french}</p>
-          <p className="flip-card-hint">{hint}</p>
         </div>
         <div className="flip-card-face flip-card-back">
           <span className="flip-card-label">Hébreu</span>
