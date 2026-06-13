@@ -19,7 +19,7 @@ const flashcardExercises = [
     id: 'flashcards-general' as const,
     icon: '🃏',
     name: 'Vocabulaire général',
-    description: 'Salutations, nombres, mots du quotidien',
+    description: 'Verbes hébreux sélectionnés',
     cards: vocabulary,
     title: 'Vocabulaire général',
   },

@@ -109,6 +109,7 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
       </div>
 
       <FlipCard
+        key={currentCard.id}
         entry={currentCard}
         isFlipped={isFlipped}
         onFlip={() => !isNavigating && setIsFlipped((flipped) => !flipped)}

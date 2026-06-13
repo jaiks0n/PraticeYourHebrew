@@ -106,6 +106,37 @@ export const VOCABULARY_CATEGORIES = [
   'Ville & Architecture',
 ] as const satisfies readonly VocabularyCategory[]
 
+export interface ConjugationCell {
+  hebrew: string
+  transcription: string
+  french?: string
+}
+
+/** Clés pour passé / futur — correspondent aux cases du tableau (personne + nombre + genre). */
+export type ConjugationPersonKey =
+  | '1sg'
+  | '1pl'
+  | '2msg'
+  | '2fsg'
+  | '2mpl'
+  | '2fpl'
+  | '3msg'
+  | '3fsg'
+  | '3mpl'
+  | '3fpl'
+  | '3pl'
+
+/** Clés pour impératif (pas de personne). */
+export type ConjugationImperativeKey = 'msg' | 'fsg' | 'mpl' | 'fpl'
+
+export interface ConjugationTable {
+  present?: Partial<Record<ConjugationImperativeKey, ConjugationCell>>
+  past?: Partial<Record<ConjugationPersonKey, ConjugationCell>>
+  future?: Partial<Record<ConjugationPersonKey, ConjugationCell>>
+  imperative?: Partial<Record<ConjugationImperativeKey, ConjugationCell>>
+  infinitive?: ConjugationCell
+}
+
 export interface VocabularyEntry {
   id: string
   french: string
@@ -119,6 +150,10 @@ export interface VocabularyEntry {
   partOfSpeech?: PartOfSpeech
   gender?: NounGender
   binyan?: Binyan
+  /** Racine (shoresh) — verbes uniquement, ex. 'א-כ-ל' ou 'נ-ש-ק-ה' */
+  root?: string
+  /** Tableau de conjugaison — verbes du deck actif uniquement */
+  conjugation?: ConjugationTable
 }
 
 export interface ConjugationEntry extends VocabularyEntry {

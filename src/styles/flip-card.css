@@ -42,6 +42,16 @@
 .flip-card-back {
   border: 2px solid #2d6a4f;
   transform: rotateY(180deg);
+  cursor: default;
+}
+
+.flip-card-back-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  width: 100%;
 }
 
 .flip-card-label {
@@ -92,4 +102,33 @@
   font-style: italic;
   color: #6b7c93;
   text-align: center;
+}
+
+.flip-card-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #8898a8;
+  text-align: center;
+}
+
+.flip-card-conj-btn {
+  margin-top: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  font-family: 'Noto Sans Hebrew', 'David Libre', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2d6a4f;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.flip-card-conj-btn:hover {
+  background: #245a42;
+}
+
+.flip-card-conj-btn:active {
+  transform: scale(0.98);
 }
