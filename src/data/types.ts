@@ -29,8 +29,6 @@ export const PARTS_OF_SPEECH = [
 
 export type NounGender = 'masculine' | 'feminine'
 
-export const NOUN_GENDERS = ['masculine', 'feminine'] as const satisfies readonly NounGender[]
-
 export type Binyan =
   | 'paal'
   | 'nifal'
@@ -154,17 +152,4 @@ export interface VocabularyEntry {
   root?: string
   /** Tableau de conjugaison — verbes du deck actif uniquement */
   conjugation?: ConjugationTable
-}
-
-export interface ConjugationEntry extends VocabularyEntry {
-  tense: 'present'
-}
-
-export interface NounGenderEntry {
-  id: string
-  hebrew: string
-  transcription: string
-  french: string
-  gender: NounGender
-  category?: VocabularyCategory | string
 }

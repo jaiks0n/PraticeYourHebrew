@@ -1,6 +1,8 @@
 ﻿import { useCallback, useEffect, useRef, useState } from 'react'
 import type { VocabularyEntry } from '../data/types'
 import { FlipCard } from './FlipCard'
+import shuffleIcon from '../assets/shuffle.svg'
+import flipIcon from '../assets/flip.svg'
 
 interface FlashcardExerciseProps {
   cards: VocabularyEntry[]
@@ -50,12 +52,6 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
     }
   }, [])
 
-  const goToPrevious = useCallback(() => {
-    afterFlipIfNeeded(() => {
-      setCurrentIndex((index) => (index > 0 ? index - 1 : cards.length - 1))
-    })
-  }, [afterFlipIfNeeded, cards.length])
-
   const goToNext = useCallback(() => {
     afterFlipIfNeeded(() => {
       setCurrentIndex((index) => (index < cards.length - 1 ? index + 1 : 0))
@@ -85,7 +81,6 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') goToPrevious()
       if (event.key === 'ArrowRight') goToNext()
       if (event.key === ' ') {
         event.preventDefault()
@@ -95,7 +90,16 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [goToNext, goToPrevious, handleFlip])
+  }, [goToNext, handleFlip])
+
+  if (sourceCards.length === 0) {
+    return (
+      <div className="exercise">
+        {title && <h2 className="exercise-title">{title}</h2>}
+        <p className="exercise-empty">Aucune carte dans ce lexique.</p>
+      </div>
+    )
+  }
 
   if (!currentCard) return null
 
@@ -116,23 +120,20 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
       />
 
       <div className="exercise-controls">
-        <button type="button" className="btn btn-secondary" onClick={goToPrevious} disabled={isNavigating}>
-          Précédent
+        <button type="button" className="btn btn-secondary btn-with-icon" onClick={handleShuffle} disabled={isNavigating}>
+        <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
+          Mélanger les cartes
         </button>
-        <button type="button" className="btn btn-secondary" onClick={handleShuffle} disabled={isNavigating}>
-          Mélanger
-        </button>
-        <button type="button" className="btn btn-flip" onClick={handleFlip} disabled={isNavigating}>
-          {isFlipped ? 'Voir le français' : 'Retourner'}
+        <button type="button" className="btn btn-flip btn-with-icon" onClick={handleFlip} disabled={isNavigating}>
+        <img src={flipIcon} alt="" className="btn-icon" width={18} height={18} />
+          {isFlipped ? 'Voir le français' : 'Voir La Traduction'}
         </button>
         <button type="button" className="btn btn-primary" onClick={goToNext} disabled={isNavigating}>
-          Suivant
+          Carte Suivante
         </button>
       </div>
 
-      <p className="exercise-shortcuts">
-        Raccourcis : flèches ← → pour naviguer, Espace pour retourner
-      </p>
+     
     </div>
   )
 }
