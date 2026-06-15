@@ -22,13 +22,17 @@
 }
 
 .conj-modal-header {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 3rem;
   border-bottom: 1px solid #e8eef5;
   background: #f8fafc;
+}
+
+.conj-modal-header-text {
+  text-align: center;
 }
 
 .conj-modal-label {
@@ -56,20 +60,22 @@
 }
 
 .conj-modal-close {
-  flex-shrink: 0;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
   width: 2.25rem;
   height: 2.25rem;
   border: none;
   border-radius: 999px;
-  background: #e8eef5;
-  color: #1e3a5f;
+  background: #f5e8e9;
+  color: #e80606;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
 .conj-modal-close:hover {
-  background: #d8e2ec;
+  background: #000000;
 }
 
 .conj-modal-body {

@@ -1,4 +1,4 @@
-﻿.flip-card {
+.flip-card {
   width: min(90vw, 420px);
   height: 280px;
   background: none;
@@ -121,6 +121,38 @@
   background: #fce7f3;
 }
 
+.flip-card-binyan {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.flip-card-binyan--paal {
+  color: #5b21b6;
+  background: #ede9fe;
+}
+
+.flip-card-binyan--nifal {
+  color: #1e4a8a;
+  background: #dbeafe;
+}
+
+.flip-card-binyan--piel {
+  color: #c2410c;
+  background: #ffedd5;
+}
+
+.flip-card-binyan--hifil {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.flip-card-binyan--hitpael {
+  color: #166534;
+  background: #dcfce7;
+}
+
 .flip-card-hint {
   margin: 0;
   font-size: 0.75rem;
@@ -135,15 +167,11 @@
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background: #2d6a4f;
+  background: #000000;
   border: none;
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.15s ease, transform 0.1s ease;
-}
-
-.flip-card-conj-btn:hover {
-  background: #245a42;
 }
 
 .flip-card-conj-btn:active {

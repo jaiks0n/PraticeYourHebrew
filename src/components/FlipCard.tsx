@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import type { NounGender, VocabularyEntry } from '../data/types'
+import type { Binyan, NounGender, VocabularyEntry } from '../data/types'
 import { ConjugationModal } from './ConjugationModal'
 import '../styles/flip-card.css'
 
@@ -19,6 +19,18 @@ const GENDER_LABELS: Record<NounGender, string> = {
   masculine: 'Masculin',
   feminine: 'Féminin',
 }
+
+const BINYAN_LABELS: Record<Binyan, string> = {
+  paal: "Pa'al",
+  nifal: "Nif'al",
+  piel: "Pi'el",
+  pual: "Pu'al",
+  hifil: "Hif'il",
+  hufal: "Huf'al",
+  hitpael: "Hitpa'el",
+}
+
+const VISIBLE_BINYANIM: Binyan[] = ['paal', 'nifal', 'piel', 'hifil', 'hitpael']
 
 export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
   const [showConjugation, setShowConjugation] = useState(false)
@@ -73,6 +85,11 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
               {entry.gender && (
                 <span className={`flip-card-gender flip-card-gender--${entry.gender}`}>
                   {GENDER_LABELS[entry.gender]}
+                </span>
+              )}
+              {entry.binyan && VISIBLE_BINYANIM.includes(entry.binyan) && (
+                <span className={`flip-card-binyan flip-card-binyan--${entry.binyan}`}>
+                  {BINYAN_LABELS[entry.binyan]}
                 </span>
               )}
             </div>

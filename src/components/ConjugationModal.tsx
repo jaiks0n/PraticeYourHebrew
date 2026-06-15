@@ -29,8 +29,7 @@ export function ConjugationModal({ french, hebrew, conjugation, onClose }: Conju
         aria-labelledby="conj-modal-title"
       >
         <header className="conj-modal-header">
-          <div>
-            <p className="conj-modal-label">Conjugaison</p>
+          <div className="conj-modal-header-text">
             <h2 id="conj-modal-title" className="conj-modal-title">
               {french}
             </h2>
