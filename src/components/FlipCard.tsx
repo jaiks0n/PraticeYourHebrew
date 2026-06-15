@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import type { VocabularyEntry } from '../data/types'
+import type { NounGender, VocabularyEntry } from '../data/types'
 import { ConjugationModal } from './ConjugationModal'
 import '../styles/flip-card.css'
 
@@ -13,6 +13,11 @@ const TENSE_LABELS: Record<string, string> = {
   present: 'Présent',
   past: 'Passé',
   future: 'Futur',
+}
+
+const GENDER_LABELS: Record<NounGender, string> = {
+  masculine: 'Masculin',
+  feminine: 'Féminin',
 }
 
 export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
@@ -65,6 +70,11 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
                 {entry.hebrew}
               </p>
               <p className="flip-card-transcription">{entry.transcription}</p>
+              {entry.gender && (
+                <span className={`flip-card-gender flip-card-gender--${entry.gender}`}>
+                  {GENDER_LABELS[entry.gender]}
+                </span>
+              )}
             </div>
             {hasConjugation && (
               <button

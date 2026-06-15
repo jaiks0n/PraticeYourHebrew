@@ -104,6 +104,23 @@
   text-align: center;
 }
 
+.flip-card-gender {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.flip-card-gender--masculine {
+  color: #1e4a8a;
+  background: #dbeafe;
+}
+
+.flip-card-gender--feminine {
+  color: #9d174d;
+  background: #fce7f3;
+}
+
 .flip-card-hint {
   margin: 0;
   font-size: 0.75rem;
