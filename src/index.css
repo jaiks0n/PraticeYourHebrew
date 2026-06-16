@@ -61,6 +61,22 @@ body {
 
 .home-title { margin: 0; font-size: 1.25rem; font-weight: 600; color: #3b4f6b; }
 
+.home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.home-section-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7c93;
+}
+
 .exercise-card {
   display: flex;
   flex-direction: column;
