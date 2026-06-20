@@ -1,28 +1,12 @@
-﻿import { useState } from 'react'
+﻿import { useEffect, useMemo, useState } from 'react'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
 import { vocabularyNoms } from './data/vocabulaire/noms'
-import { vocabulary } from './data/vocabulary'
+import { vocabulary as vocabularyLocal } from './data/vocabulary'
+import type { VocabularyEntry } from './data/types'
 
 type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz'
-
-const flashcardLexiques = [
-  {
-    id: 'flashcards-verbs' as const,
-    icon: '🧑🏼‍🏫',
-    name: 'Verbes',
-    cards: vocabulary,
-    title: 'Verbes',
-  },
-  {
-    id: 'flashcards-noms' as const,
-    icon: '📚',
-    name: 'Noms',
-    cards: vocabularyNoms,
-    title: 'Noms',
-  },
-]
 
 const genderQuizExercise = {
   id: 'gender-quiz' as const,
@@ -34,6 +18,40 @@ const genderQuizExercise = {
 
 function App() {
   const [page, setPage] = useState<Page>('home')
+  const [verbs, setVerbs] = useState<VocabularyEntry[]>(vocabularyLocal)
+
+  useEffect(() => {
+    fetch('/api/verbs')
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('API indisponible'))))
+      .then((data: VocabularyEntry[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setVerbs(data)
+        }
+      })
+      .catch(() => {
+        // Fallback : lexique local tant que MongoDB n'est pas importé ou API hors ligne
+      })
+  }, [])
+
+  const flashcardLexiques = useMemo(
+    () => [
+      {
+        id: 'flashcards-verbs' as const,
+        icon: '🧑🏼‍🏫',
+        name: 'Verbes',
+        cards: verbs,
+        title: 'Verbes',
+      },
+      {
+        id: 'flashcards-noms' as const,
+        icon: '📚',
+        name: 'Noms',
+        cards: vocabularyNoms,
+        title: 'Noms',
+      },
+    ],
+    [verbs],
+  )
 
   const activeFlashcardLexique = flashcardLexiques.find((lexique) => lexique.id === page)
 

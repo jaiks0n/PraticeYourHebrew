@@ -130,6 +130,20 @@ body {
 
 .exercise-controls { display: flex; gap: 0.75rem;  width:40%;  flex-wrap: wrap; justify-content: space-between; }
 
+@media (max-width: 1024px) {
+  .exercise-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: min(90vw, 420px);
+    justify-content: center;
+  }
+
+  .exercise-controls .btn {
+    width: 100%;
+  }
+}
+
 .btn {
   padding: 0.625rem 1.25rem;
   font-size: 0.9rem;

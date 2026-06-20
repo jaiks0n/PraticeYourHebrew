@@ -51,7 +51,6 @@ export const vocabularyNoms: VocabularyEntry[] = [
   { id: '45', french: 'amour', hebrew: 'אהבה', transcription: 'ahava', category: 'Concepts & Abstractions', partOfSpeech: 'noun', gender: 'feminine' },
   { id: '46', french: 'guerre', hebrew: 'מלחמה', transcription: 'milchama', category: 'Concepts & Abstractions', partOfSpeech: 'noun', gender: 'feminine' },
   { id: '47', french: 'paix', hebrew: 'שלום', transcription: 'shalom', category: 'Concepts & Abstractions', partOfSpeech: 'noun', gender: 'masculine' },
-  { id: '48', french: 'lettre', hebrew: 'אtter', transcription: 'ot', category: 'Animaux', partOfSpeech: 'noun', gender: 'feminine' },
+  { id: '48', french: 'lettre', hebrew: 'אות', transcription: 'ot', category: 'Animaux', partOfSpeech: 'noun', gender: 'feminine' },
   { id: '49', french: 'nombre', hebrew: 'מספר', transcription: 'mispar', category: 'Animaux', partOfSpeech: 'noun', gender: 'masculine' },
-  { id: '50', french: 'lettre', hebrew: 'אות', transcription: 'ot', category: 'Animaux', partOfSpeech: 'noun', gender: 'feminine' },
 ]
