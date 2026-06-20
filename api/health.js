@@ -1,9 +1,6 @@
-import { connectDB } from './lib/connect'
+import { connectDB } from './lib/db.js'
 
-export default async function handler(
-  _req: unknown,
-  res: { status: (code: number) => { json: (body: unknown) => void } },
-) {
+export default async function handler(_req, res) {
   try {
     await connectDB()
     res.status(200).json({

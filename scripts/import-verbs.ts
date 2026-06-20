@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import mongoose from 'mongoose'
 import { vocabulary } from '../src/data/vocabulary.ts'
-import { Verb } from '../api/lib/Verb.ts'
+import { Verb } from '../api/lib/db.js'
 
 const uri = process.env.MONGODB_URI
 const dbName = process.env.MONGODB_DB_NAME ?? 'practiceyourhebrew'

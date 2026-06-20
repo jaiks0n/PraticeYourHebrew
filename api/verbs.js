@@ -1,10 +1,6 @@
-import { connectDB } from './lib/connect'
-import { Verb } from './lib/Verb'
+import { connectDB, Verb } from './lib/db.js'
 
-export default async function handler(
-  _req: unknown,
-  res: { status: (code: number) => { json: (body: unknown) => void } },
-) {
+export default async function handler(_req, res) {
   try {
     await connectDB()
     const verbs = await Verb.find({}).sort({ id: 1 }).lean()
