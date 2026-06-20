@@ -1,14 +1,17 @@
 import { connectDB } from './lib/connect'
 
-export default async function handler() {
+export default async function handler(
+  _req: unknown,
+  res: { status: (code: number) => { json: (body: unknown) => void } },
+) {
   try {
     await connectDB()
-    return Response.json({
+    res.status(200).json({
       ok: true,
       database: process.env.MONGODB_DB_NAME ?? 'practiceyourhebrew',
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Erreur de connexion'
-    return Response.json({ ok: false, error: message }, { status: 500 })
+    res.status(500).json({ ok: false, error: message })
   }
 }
