@@ -1,0 +1,212 @@
+.fill-blank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.fill-blank-counter {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3b4f6b;
+}
+
+.fill-blank-stats {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.fill-blank-stat {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3b4f6b;
+}
+
+.fill-blank-result {
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.fill-blank-result-score {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e3a5f;
+}
+
+.fill-blank-result-message {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #3b4f6b;
+}
+
+.fill-blank-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(95vw, 520px);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid #3b6ea5;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fill-blank-card--correct {
+  border-color: #2d6a4f;
+  background: #f0faf4;
+  box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.25), 0 8px 28px rgba(45, 106, 79, 0.15);
+}
+
+.fill-blank-card--incorrect {
+  border-color: #c0392b;
+  background: #fef5f4;
+  box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.25), 0 8px 28px rgba(192, 57, 43, 0.15);
+}
+
+.fill-blank-sentence {
+  margin: 0;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.fill-blank-input {
+  min-width: 4rem;
+  max-width: 8rem;
+  margin: 0 0.15rem;
+  padding: 0.15rem 0.35rem;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: inherit;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #3b6ea5;
+  outline: none;
+}
+
+.fill-blank-input:focus {
+  border-bottom-color: #2d5a8a;
+  box-shadow: 0 2px 0 0 rgba(59, 110, 165, 0.3);
+}
+
+.fill-blank-input:disabled {
+  color: #1a1a1a;
+  border-bottom-style: dashed;
+  opacity: 0.85;
+}
+
+.fill-blank-answer-word {
+  display: inline;
+  margin: 0 0.15rem;
+  padding: 0 0.2rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  border-bottom: 2px solid #2d6a4f;
+}
+
+.fill-blank-card--incorrect .fill-blank-answer-word {
+  border-bottom-color: #c0392b;
+}
+
+.fill-blank-transcription-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(59, 110, 165, 0.2);
+}
+
+.fill-blank-transcription-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #3b6ea5;
+}
+
+.fill-blank-sentence-transcription {
+  margin: 0;
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+  font-weight: 600;
+  font-style: italic;
+  color: #1e3a5f;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.fill-blank-hint {
+  margin: 0;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+  font-weight: 600;
+  color: #3b4f6b;
+  direction: rtl;
+}
+
+.fill-blank-french {
+  margin: 0;
+  font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+  font-weight: 600;
+  color: #3b4f6b;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.fill-blank-feedback {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.fill-blank-feedback--correct {
+  color: #2d6a4f;
+}
+
+.fill-blank-feedback--incorrect {
+  color: #c0392b;
+  line-height: 1.5;
+}
+
+.fill-blank-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fill-blank-actions .btn {
+  min-width: 10rem;
+}
+
+.fill-blank-done {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2d6a4f;
+}
+
+.exercise-empty {
+  margin: 0;
+  color: #6b7c93;
+  text-align: center;
+}

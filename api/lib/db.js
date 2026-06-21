@@ -59,3 +59,43 @@ const verbSchema = new mongoose.Schema(
 )
 
 export const Verb = mongoose.models.Verb ?? mongoose.model('Verb', verbSchema)
+
+const fillBlankAnswerSchema = new mongoose.Schema(
+  {
+    hebrew: { type: String, required: true },
+    transcription: { type: String, required: true },
+  },
+  { _id: false },
+)
+
+const fillBlankHintSchema = new mongoose.Schema(
+  {
+    infinitiveHebrew: { type: String, required: true },
+    tense: { type: String, required: true },
+    genderLabel: String,
+  },
+  { _id: false },
+)
+
+const fillBlankExerciseSchema = new mongoose.Schema(
+  {
+    id: { type: String, required: true, unique: true, index: true },
+    type: { type: String, required: true, default: 'verb_fill_blank' },
+    category: String,
+    difficulty: { type: String, default: 'beginner' },
+    active: { type: Boolean, default: true },
+    sentence: {
+      beforeBlank: { type: String, required: true },
+      afterBlank: { type: String, required: true },
+    },
+    hint: fillBlankHintSchema,
+    french: { type: String, required: true },
+    answer: fillBlankAnswerSchema,
+    sentenceTranscription: { type: String, required: true },
+  },
+  { collection: 'fill_blank_exercises', versionKey: false },
+)
+
+export const FillBlankExercise =
+  mongoose.models.FillBlankExercise ??
+  mongoose.model('FillBlankExercise', fillBlankExerciseSchema)

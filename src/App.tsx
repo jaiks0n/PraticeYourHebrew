@@ -1,12 +1,17 @@
 ﻿import { useEffect, useMemo, useState } from 'react'
+import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
+import {
+  fillBlankExercises as fillBlankLocal,
+  type FillBlankExercise as FillBlankExerciseType,
+} from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulaire/noms'
 import { vocabulary as vocabularyLocal } from './data/vocabulary'
 import type { VocabularyEntry } from './data/types'
 
-type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz'
+type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank'
 
 const genderQuizExercise = {
   id: 'gender-quiz' as const,
@@ -16,9 +21,32 @@ const genderQuizExercise = {
   title: 'Genre des noms',
 }
 
+const fillBlankMeta = {
+  id: 'fill-blank' as const,
+  icon: '✏️',
+  name: 'Phrases à trous',
+  countLabel: 'Quiz de 5 phrases',
+  title: 'Phrases à trous',
+}
+
+function mergeFillBlankFromApi(apiExercises: FillBlankExerciseType[]): FillBlankExerciseType[] {
+  const apiById = new Map(apiExercises.map((exercise) => [exercise.id, exercise]))
+  return fillBlankLocal.map((local) => {
+    const fromApi = apiById.get(local.id)
+    if (!fromApi) return local
+    return {
+      ...fromApi,
+      sentenceTranscription:
+        fromApi.sentenceTranscription || local.sentenceTranscription,
+    }
+  })
+}
+
 function App() {
   const [page, setPage] = useState<Page>('home')
   const [verbs, setVerbs] = useState<VocabularyEntry[]>(vocabularyLocal)
+  const [fillBlankExercises, setFillBlankExercises] =
+    useState<FillBlankExerciseType[]>(fillBlankLocal)
 
   useEffect(() => {
     fetch('/api/verbs')
@@ -30,6 +58,19 @@ function App() {
       })
       .catch(() => {
         // Fallback : lexique local tant que MongoDB n'est pas importé ou API hors ligne
+      })
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/fill-blank-exercises')
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('API indisponible'))))
+      .then((data: FillBlankExerciseType[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setFillBlankExercises(mergeFillBlankFromApi(data))
+        }
+      })
+      .catch(() => {
+        // Fallback : exercices locaux
       })
   }, [])
 
@@ -94,6 +135,15 @@ function App() {
                 <span className="exercise-card-name">{genderQuizExercise.name}</span>
                 <span className="exercise-card-count">{genderQuizExercise.countLabel}</span>
               </button>
+              <button
+                type="button"
+                className="exercise-card"
+                onClick={() => setPage(fillBlankMeta.id)}
+              >
+                <span className="exercise-card-icon">{fillBlankMeta.icon}</span>
+                <span className="exercise-card-name">{fillBlankMeta.name}</span>
+                <span className="exercise-card-count">{fillBlankMeta.countLabel}</span>
+              </button>
             </div>
           </section>
         </div>
@@ -102,6 +152,12 @@ function App() {
           key="gender-quiz"
           words={vocabularyNoms}
           title={genderQuizExercise.title}
+        />
+      ) : page === 'fill-blank' ? (
+        <FillBlankExercise
+          key="fill-blank"
+          exercises={fillBlankExercises}
+          title={fillBlankMeta.title}
         />
       ) : activeFlashcardLexique ? (
         <FlashcardExercise

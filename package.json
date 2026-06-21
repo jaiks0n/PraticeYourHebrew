@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "deploy": "vercel --prod",
     "test:mongo": "node scripts/test-mongo.mjs",
-    "import:verbs": "tsx scripts/import-verbs.ts"
+    "import:verbs": "tsx scripts/import-verbs.ts",
+    "import:fill-blank": "tsx scripts/import-fill-blank-exercises.ts"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
