@@ -3,12 +3,8 @@ import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
-import {
-  fillBlankExercises as fillBlankLocal,
-  type FillBlankExercise as FillBlankExerciseType,
-} from './data/fill-blank-exercises'
+import type { FillBlankExercise as FillBlankExerciseType } from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulaire/noms'
-import { vocabulary as vocabularyLocal } from './data/vocabulary'
 import type { VocabularyEntry } from './data/types'
 
 type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank'
@@ -29,49 +25,53 @@ const fillBlankMeta = {
   title: 'Phrases à trous',
 }
 
-function mergeFillBlankFromApi(apiExercises: FillBlankExerciseType[]): FillBlankExerciseType[] {
-  const apiById = new Map(apiExercises.map((exercise) => [exercise.id, exercise]))
-  return fillBlankLocal.map((local) => {
-    const fromApi = apiById.get(local.id)
-    if (!fromApi) return local
-    return {
-      ...fromApi,
-      sentenceTranscription:
-        fromApi.sentenceTranscription || local.sentenceTranscription,
-    }
-  })
+function DataMessage({ message, error }: { message: string; error?: boolean }) {
+  return (
+    <p className={error ? 'data-status data-status--error' : 'data-status'}>
+      {message}
+    </p>
+  )
 }
 
 function App() {
   const [page, setPage] = useState<Page>('home')
-  const [verbs, setVerbs] = useState<VocabularyEntry[]>(vocabularyLocal)
-  const [fillBlankExercises, setFillBlankExercises] =
-    useState<FillBlankExerciseType[]>(fillBlankLocal)
+  const [verbs, setVerbs] = useState<VocabularyEntry[]>([])
+  const [verbsLoading, setVerbsLoading] = useState(true)
+  const [verbsError, setVerbsError] = useState<string | null>(null)
+  const [fillBlankExercises, setFillBlankExercises] = useState<FillBlankExerciseType[]>([])
+  const [fillBlankLoading, setFillBlankLoading] = useState(true)
+  const [fillBlankError, setFillBlankError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/verbs')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('API indisponible'))))
+    fetch('/api/verbs', { cache: 'no-store' })
+      .then((res) => {
+        if (!res.ok) throw new Error('Impossible de charger les verbes')
+        return res.json()
+      })
       .then((data: VocabularyEntry[]) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setVerbs(data)
-        }
+        if (!Array.isArray(data)) throw new Error('Réponse invalide')
+        setVerbs(data)
       })
-      .catch(() => {
-        // Fallback : lexique local tant que MongoDB n'est pas importé ou API hors ligne
+      .catch((err) => {
+        setVerbsError(err instanceof Error ? err.message : 'Erreur de chargement')
       })
+      .finally(() => setVerbsLoading(false))
   }, [])
 
   useEffect(() => {
-    fetch('/api/fill-blank-exercises')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('API indisponible'))))
+    fetch('/api/fill-blank-exercises', { cache: 'no-store' })
+      .then((res) => {
+        if (!res.ok) throw new Error('Impossible de charger les phrases à trous')
+        return res.json()
+      })
       .then((data: FillBlankExerciseType[]) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setFillBlankExercises(mergeFillBlankFromApi(data))
-        }
+        if (!Array.isArray(data)) throw new Error('Réponse invalide')
+        setFillBlankExercises(data)
       })
-      .catch(() => {
-        // Fallback : exercices locaux
+      .catch((err) => {
+        setFillBlankError(err instanceof Error ? err.message : 'Erreur de chargement')
       })
+      .finally(() => setFillBlankLoading(false))
   }, [])
 
   const flashcardLexiques = useMemo(
@@ -82,6 +82,8 @@ function App() {
         name: 'Verbes',
         cards: verbs,
         title: 'Verbes',
+        loading: verbsLoading,
+        error: verbsError,
       },
       {
         id: 'flashcards-noms' as const,
@@ -89,12 +91,16 @@ function App() {
         name: 'Noms',
         cards: vocabularyNoms,
         title: 'Noms',
+        loading: false,
+        error: null,
       },
     ],
-    [verbs],
+    [verbs, verbsLoading, verbsError],
   )
 
   const activeFlashcardLexique = flashcardLexiques.find((lexique) => lexique.id === page)
+
+  const fillBlankUnavailable = fillBlankLoading || fillBlankError !== null || fillBlankExercises.length === 0
 
   return (
     <Layout
@@ -102,24 +108,37 @@ function App() {
       onBack={() => setPage('home')}
     >
       {page === 'home' ? (
+        verbsLoading ? (
+          <DataMessage message="Chargement…" />
+        ) : (
         <div className="home">
           <h2 className="home-title">Choisissez un mode</h2>
 
           <section className="home-section">
             <h3 className="home-section-title">Lexiques</h3>
             <div className="exercise-list">
-              {flashcardLexiques.map((lexique) => (
-                <button
-                  key={lexique.id}
-                  type="button"
-                  className="exercise-card"
-                  onClick={() => setPage(lexique.id)}
-                >
-                  <span className="exercise-card-icon">{lexique.icon}</span>
-                  <span className="exercise-card-name">{lexique.name}</span>
-                  <span className="exercise-card-count">{lexique.cards.length} cartes</span>
-                </button>
-              ))}
+              {flashcardLexiques.map((lexique) => {
+                const unavailable = lexique.loading || lexique.error !== null || lexique.cards.length === 0
+                const countLabel = lexique.loading
+                  ? 'Chargement…'
+                  : lexique.error
+                    ? 'Indisponible'
+                    : `${lexique.cards.length} cartes`
+
+                return (
+                  <button
+                    key={lexique.id}
+                    type="button"
+                    className={`exercise-card${unavailable ? ' exercise-card--disabled' : ''}`}
+                    disabled={unavailable}
+                    onClick={() => setPage(lexique.id)}
+                  >
+                    <span className="exercise-card-icon">{lexique.icon}</span>
+                    <span className="exercise-card-name">{lexique.name}</span>
+                    <span className="exercise-card-count">{countLabel}</span>
+                  </button>
+                )
+              })}
             </div>
           </section>
 
@@ -137,16 +156,24 @@ function App() {
               </button>
               <button
                 type="button"
-                className="exercise-card"
+                className={`exercise-card${fillBlankUnavailable ? ' exercise-card--disabled' : ''}`}
+                disabled={fillBlankUnavailable}
                 onClick={() => setPage(fillBlankMeta.id)}
               >
                 <span className="exercise-card-icon">{fillBlankMeta.icon}</span>
                 <span className="exercise-card-name">{fillBlankMeta.name}</span>
-                <span className="exercise-card-count">{fillBlankMeta.countLabel}</span>
+                <span className="exercise-card-count">
+                  {fillBlankLoading
+                    ? 'Chargement…'
+                    : fillBlankError
+                      ? 'Indisponible'
+                      : fillBlankMeta.countLabel}
+                </span>
               </button>
             </div>
           </section>
         </div>
+        )
       ) : page === 'gender-quiz' ? (
         <GenderQuizExercise
           key="gender-quiz"
@@ -154,17 +181,29 @@ function App() {
           title={genderQuizExercise.title}
         />
       ) : page === 'fill-blank' ? (
-        <FillBlankExercise
-          key="fill-blank"
-          exercises={fillBlankExercises}
-          title={fillBlankMeta.title}
-        />
+        fillBlankLoading ? (
+          <DataMessage message="Chargement des phrases à trous…" />
+        ) : fillBlankError ? (
+          <DataMessage message={fillBlankError} error />
+        ) : (
+          <FillBlankExercise
+            key="fill-blank"
+            exercises={fillBlankExercises}
+            title={fillBlankMeta.title}
+          />
+        )
       ) : activeFlashcardLexique ? (
-        <FlashcardExercise
-          key={activeFlashcardLexique.id}
-          cards={activeFlashcardLexique.cards}
-          title={activeFlashcardLexique.title}
-        />
+        activeFlashcardLexique.id === 'flashcards-verbs' && verbsLoading ? (
+          <DataMessage message="Chargement des verbes…" />
+        ) : activeFlashcardLexique.id === 'flashcards-verbs' && verbsError ? (
+          <DataMessage message={verbsError} error />
+        ) : (
+          <FlashcardExercise
+            key={activeFlashcardLexique.id}
+            cards={activeFlashcardLexique.cards}
+            title={activeFlashcardLexique.title}
+          />
+        )
       ) : null}
     </Layout>
   )

@@ -72,6 +72,12 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
   }, [])
 
   useEffect(() => {
+    setCards(sourceCards)
+    setCurrentIndex(0)
+    setIsFlipped(false)
+  }, [sourceCards])
+
+  useEffect(() => {
     return () => {
       if (navigateTimeoutRef.current) {
         clearTimeout(navigateTimeoutRef.current)
