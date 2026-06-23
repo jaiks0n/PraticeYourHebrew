@@ -1,6 +1,6 @@
 # Practice Your Hebrew
 
-Site d'exercices pour apprendre l'hébreu à l'oral : cartes à retourner (vocabulaire, entretien dev, conjugaison au présent).
+Site d'exercices pour apprendre l'hébreu : flashcards verbes, noms, quiz de genre, phrases à trous.
 
 **Site en ligne :** [https://praticeyourhebrew.vercel.app](https://praticeyourhebrew.vercel.app)
 
@@ -13,6 +13,8 @@ npm run dev
 
 Ouvrir [http://localhost:5173](http://localhost:5173)
 
+Les données (verbes, phrases à trous) sont lues directement depuis les fichiers dans `src/data/`.
+
 ## Build
 
 ```bash
@@ -22,31 +24,7 @@ npm run preview
 
 ## Déploiement sur Vercel
 
-### Première fois
-
-1. **GitHub** (pousser le code) :
-   ```bash
-   gh auth login
-   gh repo create PraticeYourHebrew --public --source=. --push
-   ```
-
-2. **Vercel via le site** (recommandé) :
-   - [vercel.com](https://vercel.com) → connexion GitHub
-   - **Add New Project** → importer `PraticeYourHebrew`
-   - Build : `npm run build` — Output : `dist`
-   - **Deploy**
-
-3. **Vercel via CLI** (alternative) :
-   ```bash
-   npx vercel login
-   npm run deploy
-   ```
-
-### Mises à jour
-
 ```bash
-git add .
-git commit -m "Votre message"
 git push
 ```
 
@@ -56,6 +34,10 @@ Vercel redéploie automatiquement si le projet est lié à GitHub.
 
 | Fichier | Contenu |
 |---------|---------|
-| `src/data/vocabulary.ts` | Vocabulaire général |
-| `src/data/vocabulary-dev-interview.ts` | Entretien d'embauche dev |
-| `src/data/conjugation-present.ts` | Conjugaison au présent |
+| `src/data/vocabulary.ts` | Verbes (flashcards) |
+| `src/data/fill-blank-exercises.ts` | Phrases à trous |
+| `src/data/vocabulaire/noms/` | Noms |
+
+## MongoDB (optionnel)
+
+Le dossier `api/` et les scripts `import:verbs` / `import:fill-blank` permettent de synchroniser les données vers MongoDB si besoin, mais l'application n'en dépend pas.

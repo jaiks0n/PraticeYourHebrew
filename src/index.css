@@ -98,33 +98,6 @@ body {
   transform: translateY(-2px);
 }
 
-.exercise-card--disabled,
-.exercise-card:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.exercise-card--disabled:hover,
-.exercise-card:disabled:hover {
-  border-color: #d0dae8;
-  box-shadow: none;
-  transform: none;
-}
-
-.data-status {
-  margin: 2rem 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #3b4f6b;
-  text-align: center;
-}
-
-.data-status--error {
-  color: #b42318;
-}
-
 .exercise-card-icon { font-size: 2.5rem; }
 .exercise-card-name { font-size: 1.25rem; font-weight: 700; color: #1e3a5f; }
 .exercise-card-desc { font-size: 0.9rem; color: #6b7c93; line-height: 1.4; }
@@ -142,6 +115,18 @@ body {
   font-weight: 700;
   color: #1e3a5f;
   text-align: center;
+}
+
+.verb-list {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.verb-list ol {
+  margin: 1.5rem 0 0;
+  padding-left: 1.5rem;
+  line-height: 1.8;
+  color: #1e3a5f;
 }
 
 .exercise {
