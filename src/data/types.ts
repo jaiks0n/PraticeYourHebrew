@@ -48,7 +48,7 @@ export const BINYANIM = [
   'hitpael',
 ] as const satisfies readonly Binyan[]
 
-/** Thèmes recommandés + catégories encore présentes dans vocabulary.ts (legacy, à migrer pendant la relecture). */
+/** Thèmes recommandés + catégories encore présentes dans vocabulary-verbes.ts (legacy, à migrer pendant la relecture). */
 export type VocabularyCategory =
   | 'Salutations & Expressions'
   | 'Nourriture & Restaurant'
@@ -140,6 +140,9 @@ export interface VocabularyEntry {
   french: string
   hebrew: string
   transcription: string
+  /** Forme plurielle — affichée après « / » quand présente */
+  hebrewPlural?: string
+  transcriptionPlural?: string
   /** Thème — utiliser une valeur de `VocabularyCategory` ; `string` accepté pour les anciennes catégories. */
   category?: VocabularyCategory | string
   tense?: 'present' | 'past' | 'future'
@@ -152,4 +155,6 @@ export interface VocabularyEntry {
   root?: string
   /** Tableau de conjugaison — verbes du deck actif uniquement */
   conjugation?: ConjugationTable
+  /** Note pédagogique optionnelle (exception, règle, etc.) */
+  note?: string
 }

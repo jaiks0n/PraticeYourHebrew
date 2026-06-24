@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import mongoose from 'mongoose'
-import { vocabulary } from '../src/data/vocabulary.ts'
+import { vocabulary } from '../src/data/vocabulary-verbes.ts'
 import { Verb } from '../api/lib/db.js'
 
 const uri = process.env.MONGODB_URI

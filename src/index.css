@@ -47,9 +47,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
-  max-width: 520px;
+  max-width: 36rem;
 }
 
 .exercise-list {
@@ -57,6 +57,38 @@ body {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+}
+
+.exercise-list--grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.exercise-list--grid-2 .exercise-card {
+  padding: 1.1rem 0.75rem;
+}
+
+.exercise-list--grid-2 .exercise-card-icon {
+  font-size: 2rem;
+}
+
+.exercise-list--grid-2 .exercise-card-name {
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.exercise-list--grid-2 .exercise-card-count {
+  font-size: 0.75rem;
+}
+
+.layout:has(.home) .header {
+  padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.layout:has(.home) .main {
+  justify-content: flex-start;
+  padding-top: 0.75rem;
 }
 
 .home-title { margin: 0; font-size: 1.25rem; font-weight: 600; color: #3b4f6b; }
@@ -166,6 +198,22 @@ body {
 
 .verb-list-transcription {
   font-style: italic;
+}
+
+.verb-list-gender {
+  width: 3rem;
+  color: #6b7c93;
+  font-weight: 600;
+}
+
+.verb-list-note {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.35;
+  color: #8a7340;
 }
 
 .exercise {

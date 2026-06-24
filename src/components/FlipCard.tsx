@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react'
 import type { Binyan, NounGender, VocabularyEntry } from '../data/types'
+import { formatHebrewDisplay, formatTranscriptionDisplay } from '../utils/formatNounHebrew'
 import { ConjugationModal } from './ConjugationModal'
 import '../styles/flip-card.css'
 
@@ -79,10 +80,9 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
             >
               <span className="flip-card-label">Hébreu</span>
               <p className="flip-card-hebrew" dir="rtl" lang="he">
-                {entry.hebrew}
+                {formatHebrewDisplay(entry)}
               </p>
-              <p className="flip-card-transcription">{entry.transcription}</p>
-              {entry.gender && (
+              <p className="flip-card-transcription">{formatTranscriptionDisplay(entry)}</p>              {entry.gender && (
                 <span className={`flip-card-gender flip-card-gender--${entry.gender}`}>
                   {GENDER_LABELS[entry.gender]}
                 </span>
@@ -91,6 +91,9 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
                 <span className={`flip-card-binyan flip-card-binyan--${entry.binyan}`}>
                   {BINYAN_LABELS[entry.binyan]}
                 </span>
+              )}
+              {entry.note && (
+                <p className="flip-card-note">{entry.note}</p>
               )}
             </div>
             {hasConjugation && (

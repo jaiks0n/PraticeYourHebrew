@@ -34,9 +34,9 @@ Vercel redéploie automatiquement si le projet est lié à GitHub.
 
 | Fichier | Contenu |
 |---------|---------|
-| `src/data/vocabulary.ts` | Verbes (flashcards) |
+| `src/data/vocabulary-verbes.ts` | Verbes (flashcards) |
 | `src/data/fill-blank-exercises.ts` | Phrases à trous |
-| `src/data/vocabulaire/noms/` | Noms |
+| `src/data/vocabulary-noms.ts` | Noms |
 
 ## MongoDB (optionnel)
 

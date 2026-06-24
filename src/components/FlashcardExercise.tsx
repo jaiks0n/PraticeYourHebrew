@@ -127,19 +127,17 @@ export function FlashcardExercise({ cards: sourceCards, title }: FlashcardExerci
 
       <div className="exercise-controls">
         <button type="button" className="btn btn-secondary btn-with-icon" onClick={handleShuffle} disabled={isNavigating}>
-        <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
+          <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
           Mélanger les cartes
         </button>
         <button type="button" className="btn btn-flip btn-with-icon" onClick={handleFlip} disabled={isNavigating}>
-        <img src={flipIcon} alt="" className="btn-icon" width={18} height={18} />
+          <img src={flipIcon} alt="" className="btn-icon" width={18} height={18} />
           {isFlipped ? 'Voir le français' : 'Voir La Traduction'}
         </button>
         <button type="button" className="btn btn-primary" onClick={goToNext} disabled={isNavigating}>
           Carte Suivante
         </button>
       </div>
-
-     
     </div>
   )
 }

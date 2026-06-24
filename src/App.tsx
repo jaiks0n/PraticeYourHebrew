@@ -1,14 +1,15 @@
 ﻿import { useState } from 'react'
+import { NounList } from './components/NounList'
 import { VerbList } from './components/VerbList'
 import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
 import { fillBlankExercises } from './data/fill-blank-exercises'
-import { vocabularyNoms } from './data/vocabulaire/noms'
-import { vocabulary } from './data/vocabulary'
+import { vocabularyNoms } from './data/vocabulary-noms'
+import { vocabulary } from './data/vocabulary-verbes'
 
-type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank' | 'verb-list'
+type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank' | 'verb-list' | 'noun-list'
 
 const flashcardLexiques = [
   {
@@ -59,7 +60,7 @@ function App() {
 
           <section className="home-section">
             <h3 className="home-section-title">Lexiques</h3>
-            <div className="exercise-list">
+            <div className="exercise-list exercise-list--grid-2">
               {flashcardLexiques.map((lexique) => (
                 <button
                   key={lexique.id}
@@ -81,12 +82,21 @@ function App() {
                 <span className="exercise-card-name">Liste des verbes</span>
                 <span className="exercise-card-count">{vocabulary.length} verbes</span>
               </button>
+              <button
+                type="button"
+                className="exercise-card"
+                onClick={() => setPage('noun-list')}
+              >
+                <span className="exercise-card-icon">📋</span>
+                <span className="exercise-card-name">Liste des noms</span>
+                <span className="exercise-card-count">{vocabularyNoms.length} noms</span>
+              </button>
             </div>
           </section>
 
           <section className="home-section">
             <h3 className="home-section-title">Exercices</h3>
-            <div className="exercise-list">
+            <div className="exercise-list exercise-list--grid-2">
               <button
                 type="button"
                 className="exercise-card"
@@ -122,6 +132,8 @@ function App() {
         />
       ) : page === 'verb-list' ? (
         <VerbList key="verb-list" />
+      ) : page === 'noun-list' ? (
+        <NounList key="noun-list" />
       ) : activeFlashcardLexique ? (
         <FlashcardExercise
           key={activeFlashcardLexique.id}
