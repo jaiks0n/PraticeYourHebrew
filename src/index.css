@@ -119,14 +119,53 @@ body {
 
 .verb-list {
   width: 100%;
-  max-width: 28rem;
+  max-width: 42rem;
 }
 
-.verb-list ol {
-  margin: 1.5rem 0 0;
-  padding-left: 1.5rem;
-  line-height: 1.8;
+.verb-list-table {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
   color: #1e3a5f;
+  font-size: 0.95rem;
+}
+
+.verb-list-table th,
+.verb-list-table td {
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #d8e2ef;
+}
+
+.verb-list-table th {
+  font-weight: 700;
+  color: #3b4f6b;
+  border-bottom-width: 2px;
+}
+
+.verb-list-num {
+  width: 2.5rem;
+  font-weight: 600;
+  color: #6b7c93;
+}
+
+.verb-list-french {
+  font-weight: 600;
+}
+
+.verb-list-infinitive {
+  color: #4a5f7a;
+}
+
+.verb-list-hebrew {
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.verb-list-transcription {
+  font-style: italic;
 }
 
 .exercise {

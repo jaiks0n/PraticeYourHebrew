@@ -40,7 +40,7 @@ const fillBlankMeta = {
   icon: '✏️',
   name: 'Phrases à trous',
   countLabel: 'Quiz de 5 phrases',
-  title: 'Phrases à trous',
+  title: 'Phrases à trou',
 }
 
 function App() {
