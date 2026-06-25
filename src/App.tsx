@@ -1,11 +1,13 @@
 ﻿import { useState } from 'react'
 import { CoursEt } from './components/CoursEt'
+import { EtChoiceExercise } from './components/EtChoiceExercise'
 import { NounList } from './components/NounList'
 import { VerbList } from './components/VerbList'
 import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
+import { etChoiceExercises } from './data/et-choice-exercises'
 import { fillBlankExercises } from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulary-noms'
 import { vocabulary } from './data/vocabulary-verbes'
@@ -16,6 +18,7 @@ type Page =
   | 'flashcards-verbs'
   | 'flashcards-noms'
   | 'gender-quiz'
+  | 'et-choice'
   | 'fill-blank'
   | 'verb-list'
   | 'noun-list'
@@ -43,6 +46,14 @@ const genderQuizExercise = {
   name: 'Genre des noms',
   countLabel: `Quiz de 10 mots`,
   title: 'Genre des noms',
+}
+
+const etChoiceMeta = {
+  id: 'et-choice' as const,
+  icon: 'את',
+  name: 'את ou rien',
+  countLabel: 'Quiz de 5 phrases',
+  title: 'את ou rien',
 }
 
 const fillBlankMeta = {
@@ -124,6 +135,15 @@ function App() {
               <button
                 type="button"
                 className="exercise-card"
+                onClick={() => setPage(etChoiceMeta.id)}
+              >
+                <span className="exercise-card-icon">{etChoiceMeta.icon}</span>
+                <span className="exercise-card-name">{etChoiceMeta.name}</span>
+                <span className="exercise-card-count">{etChoiceMeta.countLabel}</span>
+              </button>
+              <button
+                type="button"
+                className="exercise-card"
                 onClick={() => setPage(genderQuizExercise.id)}
               >
                 <span className="exercise-card-icon">{genderQuizExercise.icon}</span>
@@ -147,6 +167,12 @@ function App() {
           key="gender-quiz"
           words={vocabularyNoms}
           title={genderQuizExercise.title}
+        />
+      ) : page === 'et-choice' ? (
+        <EtChoiceExercise
+          key="et-choice"
+          exercises={etChoiceExercises}
+          title={etChoiceMeta.title}
         />
       ) : page === 'fill-blank' ? (
         <FillBlankExercise
