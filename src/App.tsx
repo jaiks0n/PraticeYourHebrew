@@ -1,4 +1,5 @@
 ﻿import { useState } from 'react'
+import { CoursEt } from './components/CoursEt'
 import { NounList } from './components/NounList'
 import { VerbList } from './components/VerbList'
 import { FillBlankExercise } from './components/FillBlankExercise'
@@ -9,7 +10,15 @@ import { fillBlankExercises } from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulary-noms'
 import { vocabulary } from './data/vocabulary-verbes'
 
-type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank' | 'verb-list' | 'noun-list'
+type Page =
+  | 'home'
+  | 'cours-et'
+  | 'flashcards-verbs'
+  | 'flashcards-noms'
+  | 'gender-quiz'
+  | 'fill-blank'
+  | 'verb-list'
+  | 'noun-list'
 
 const flashcardLexiques = [
   {
@@ -57,6 +66,21 @@ function App() {
       {page === 'home' ? (
         <div className="home">
           <h2 className="home-title">Choisissez un mode</h2>
+
+          <section className="home-section">
+            <h3 className="home-section-title">Cours</h3>
+            <div className="exercise-list exercise-list--grid-2">
+              <button
+                type="button"
+                className="exercise-card"
+                onClick={() => setPage('cours-et')}
+              >
+                <span className="exercise-card-icon">📖</span>
+                <span className="exercise-card-name">את (et)</span>
+                <span className="exercise-card-count">7 sections</span>
+              </button>
+            </div>
+          </section>
 
           <section className="home-section">
             <h3 className="home-section-title">Lexiques</h3>
@@ -130,6 +154,8 @@ function App() {
           exercises={fillBlankExercises}
           title={fillBlankMeta.title}
         />
+      ) : page === 'cours-et' ? (
+        <CoursEt key="cours-et" />
       ) : page === 'verb-list' ? (
         <VerbList key="verb-list" />
       ) : page === 'noun-list' ? (

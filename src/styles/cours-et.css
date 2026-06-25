@@ -1,0 +1,477 @@
+.cours-et {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+.cours-et-title {
+  margin: 0 0 2.5rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e3a5f;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.cours-et-accent {
+  color: #3b6ea5;
+}
+
+.cours-et-section {
+  margin-bottom: 2.5rem;
+}
+
+.cours-et-section-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+.cours-et-text {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #3b4f6b;
+}
+
+.cours-et-text strong {
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+.cours-et-box {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+}
+
+.cours-et-box:last-child {
+  margin-bottom: 0;
+}
+
+.cours-et-box--blue {
+  background: #eff6ff;
+}
+
+.cours-et-box--red {
+  background: #fef2f2;
+}
+
+.cours-et-box--green {
+  background: #f0fdf4;
+}
+
+.cours-et-box--orange {
+  background: #fff7ed;
+}
+
+.cours-et-box--gray {
+  background: #f7f9fc;
+}
+
+.cours-et-box-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cours-et-box--blue .cours-et-box-title { color: #1e40af; }
+.cours-et-box--red .cours-et-box-title { color: #991b1b; }
+.cours-et-box--green .cours-et-box-title { color: #166534; }
+.cours-et-box--orange .cours-et-box-title { color: #9a3412; }
+
+.cours-et-box-text {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #3b4f6b;
+}
+
+.cours-et-box--intro {
+  margin-bottom: 1rem;
+}
+
+.cours-et-box-text--tight {
+  margin-bottom: 0;
+}
+
+.cours-et-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cours-et-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.75rem;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.cours-et-example-hebrew,
+.cours-et-example-transcription,
+.cours-et-example-french {
+  margin: 0;
+}
+
+.cours-et-example-hebrew {
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: right;
+  line-height: 1.25;
+}
+
+.cours-et-example-transcription {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #9aa8b8;
+  line-height: 1.2;
+}
+
+.cours-et-example-french {
+  font-size: 0.88rem;
+  color: #3b4f6b;
+  line-height: 1.3;
+  margin-top: 0.15rem;
+}
+
+.cours-et-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.cours-et-box--blue .cours-et-note { color: #1d4ed8; }
+.cours-et-box--red .cours-et-note { color: #b91c1c; font-weight: 700; }
+
+.cours-et-formula {
+  margin: 0 0 0.75rem;
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e3a5f;
+}
+
+.cours-et-formula-example {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e3a5f;
+  line-height: 1.5;
+}
+
+.cours-et-formula-example-hebrew {
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 1.15rem;
+}
+
+.cours-et-formula-exceptions {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cours-et-formula-exception {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: #ffffff;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.cours-et-formula-exception-label {
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+.cours-et-formula-exception-arrow {
+  color: #6b7c93;
+}
+
+.cours-et-formula-exception-hebrew {
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3b6ea5;
+}
+
+.cours-et-formula-exception-note {
+  flex: 1 1 100%;
+  font-size: 0.82rem;
+  color: #6b7c93;
+}
+
+.cours-et-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cours-et-badge--yes {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.cours-et-badge--no {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.cours-et-rule-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cours-et-rule-card {
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+}
+
+.cours-et-rule-card--yes {
+  background: #f0fdf4;
+  border-left-color: #22c55e;
+}
+
+.cours-et-rule-card--no {
+  background: #fef2f2;
+  border-left-color: #ef4444;
+}
+
+.cours-et-rule-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.cours-et-rule-card-situation {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+.cours-et-rule-card-badge {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.cours-et-rule-card--yes .cours-et-rule-card-badge {
+  background: #bbf7d0;
+  color: #14532d;
+}
+
+.cours-et-rule-card--no .cours-et-rule-card-badge {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+.cours-et-rule-card-tip {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  color: #6b7c93;
+}
+
+.cours-et-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.cours-et-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cours-et-table thead {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.cours-et-table th,
+.cours-et-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.cours-et-table th:nth-child(2),
+.cours-et-table td:nth-child(2) {
+  text-align: right;
+}
+
+.cours-et-table--articles th:nth-child(2),
+.cours-et-table--articles td:nth-child(2),
+.cours-et-table--articles th:nth-child(3),
+.cours-et-table--articles td:nth-child(3) {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cours-et-table--articles th:nth-child(3),
+.cours-et-table--articles td:nth-child(3) {
+  width: 1%;
+}
+
+.cours-et-table tbody tr:nth-child(even) {
+  background: #f7f9fc;
+}
+
+.cours-et-table-hebrew {
+  font-family: 'Noto Sans Hebrew', 'David Libre', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.cours-et-table-transcription {
+  font-style: italic;
+  color: #9aa8b8;
+}
+
+.cours-et-comparisons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cours-et-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.cours-et-comparison-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+.cours-et-comparison-col--indef {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.cours-et-comparison-col--def {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.cours-et-comparison-col--empty {
+  background: #fef2f2;
+  border-color: #fecaca;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cours-et-comparison-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cours-et-comparison-col--indef .cours-et-comparison-label { color: #c2410c; }
+.cours-et-comparison-col--def .cours-et-comparison-label { color: #15803d; }
+
+.cours-et-comparison-empty-text {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #dc2626;
+  line-height: 1.4;
+}
+
+.cours-et-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cours-et-summary-card {
+  padding: 1.25rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+}
+
+.cours-et-summary-card--red {
+  background: #fee2e2;
+  border-left-color: #ef4444;
+}
+
+.cours-et-summary-card--orange {
+  background: #ffedd5;
+  border-left-color: #f97316;
+}
+
+.cours-et-summary-card--green {
+  background: #dcfce7;
+  border-left-color: #22c55e;
+}
+
+.cours-et-summary-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cours-et-summary-card--red .cours-et-summary-title { color: #991b1b; }
+.cours-et-summary-card--orange .cours-et-summary-title { color: #9a3412; }
+.cours-et-summary-card--green .cours-et-summary-title { color: #166534; }
+
+.cours-et-summary-text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.cours-et-summary-card--red .cours-et-summary-text { color: #b91c1c; }
+.cours-et-summary-card--orange .cours-et-summary-text { color: #c2410c; }
+.cours-et-summary-card--green .cours-et-summary-text { color: #15803d; }
+
+.layout:has(.cours-et) .main {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .cours-et-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .cours-et-rule-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
