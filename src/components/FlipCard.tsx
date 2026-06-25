@@ -82,8 +82,7 @@ export function FlipCard({ entry, isFlipped, onFlip }: FlipCardProps) {
               <p className="flip-card-hebrew" dir="rtl" lang="he">
                 {formatHebrewDisplay(entry)}
               </p>
-              <p className="flip-card-transcription">{formatTranscriptionDisplay(entry)}</p>
-              {entry.gender && (
+              <p className="flip-card-transcription">{formatTranscriptionDisplay(entry)}</p>              {entry.gender && (
                 <span className={`flip-card-gender flip-card-gender--${entry.gender}`}>
                   {GENDER_LABELS[entry.gender]}
                 </span>

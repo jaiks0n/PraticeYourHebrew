@@ -1,25 +1,15 @@
 ﻿import { useState } from 'react'
-import { CourseView } from './components/CourseView'
 import { NounList } from './components/NounList'
 import { VerbList } from './components/VerbList'
 import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
-import { coursEt } from './data/cours-et'
 import { fillBlankExercises } from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulary-noms'
 import { vocabulary } from './data/vocabulary-verbes'
 
-type Page =
-  | 'home'
-  | 'flashcards-verbs'
-  | 'flashcards-noms'
-  | 'gender-quiz'
-  | 'fill-blank'
-  | 'verb-list'
-  | 'noun-list'
-  | 'cours-et'
+type Page = 'home' | 'flashcards-verbs' | 'flashcards-noms' | 'gender-quiz' | 'fill-blank' | 'verb-list' | 'noun-list'
 
 const flashcardLexiques = [
   {
@@ -54,14 +44,6 @@ const fillBlankMeta = {
   title: 'Phrases à trou',
 }
 
-const coursMeta = {
-  id: 'cours-et' as const,
-  icon: '📖',
-  name: 'את (et)',
-  countLabel: '7 sections',
-  title: coursEt.title,
-}
-
 function App() {
   const [page, setPage] = useState<Page>('home')
 
@@ -75,21 +57,6 @@ function App() {
       {page === 'home' ? (
         <div className="home">
           <h2 className="home-title">Choisissez un mode</h2>
-
-          <section className="home-section">
-            <h3 className="home-section-title">Cours</h3>
-            <div className="exercise-list exercise-list--grid-2">
-              <button
-                type="button"
-                className="exercise-card"
-                onClick={() => setPage(coursMeta.id)}
-              >
-                <span className="exercise-card-icon">{coursMeta.icon}</span>
-                <span className="exercise-card-name">{coursMeta.name}</span>
-                <span className="exercise-card-count">{coursMeta.countLabel}</span>
-              </button>
-            </div>
-          </section>
 
           <section className="home-section">
             <h3 className="home-section-title">Lexiques</h3>
@@ -167,8 +134,6 @@ function App() {
         <VerbList key="verb-list" />
       ) : page === 'noun-list' ? (
         <NounList key="noun-list" />
-      ) : page === 'cours-et' ? (
-        <CourseView key="cours-et" course={coursEt} />
       ) : activeFlashcardLexique ? (
         <FlashcardExercise
           key={activeFlashcardLexique.id}

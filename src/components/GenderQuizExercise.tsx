@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { NounGender, VocabularyEntry } from '../data/types'
+import { formatHebrewDisplay, formatTranscriptionDisplay } from '../utils/formatNounHebrew'
 import '../styles/gender-quiz.css'
 
 const QUIZ_SIZE = 10
@@ -136,9 +137,9 @@ export function GenderQuizExercise({ words, title }: GenderQuizExerciseProps) {
       >
         <span className="flip-card-label">Hébreu</span>
         <p className="gender-quiz-hebrew" dir="rtl" lang="he">
-          {currentWord.hebrew}
+          {formatHebrewDisplay(currentWord)}
         </p>
-        <p className="gender-quiz-transcription">{currentWord.transcription}</p>
+        <p className="gender-quiz-transcription">{formatTranscriptionDisplay(currentWord)}</p>
 
         {isAnswered && (
           <>
