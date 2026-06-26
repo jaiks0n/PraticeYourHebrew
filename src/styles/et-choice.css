@@ -74,17 +74,18 @@
 
 .et-choice-blank {
   display: inline-block;
-  min-width: 2.5rem;
-  margin: 0 0.2rem;
-  padding: 0 0.15rem;
-  border-bottom: 3px solid #3b6ea5;
-  color: #3b6ea5;
   vertical-align: baseline;
 }
 
-.et-choice-blank--empty {
-  color: transparent;
-  user-select: none;
+.et-choice-blank--pending {
+  min-width: 2.5rem;
+  margin: 0 0.15rem;
+  border-bottom: 3px solid #3b6ea5;
+}
+
+.et-choice-blank--filled {
+  margin: 0 0.15rem;
+  color: #3b6ea5;
 }
 
 .et-choice-french {

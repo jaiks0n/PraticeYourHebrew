@@ -52,7 +52,7 @@ const etChoiceMeta = {
   id: 'et-choice' as const,
   icon: 'את',
   name: 'את ou rien',
-  countLabel: 'Quiz de 5 phrases',
+  countLabel: `${etChoiceExercises.filter((ex) => ex.active).length} phrases`,
   title: 'את ou rien',
 }
 

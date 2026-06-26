@@ -7,21 +7,28 @@ import type { VocabularyEntry } from './types'
 export const BODY_PART_PAIR_NOTE =
   'Les parties du corps qui vont par paire sont généralement au féminin et finissent par ־ים au pluriel.'
 
+export const MASCULINE_TAV_ENDING_NOTE =
+  'Ces mots finissent par ־ת mais sont masculins.'
+
+/** Noms masculins avec terminaison ־וֹת- (souvent féminine). */
+export const MASCULINE_OT_ENDING_NOTE =
+  "C'est un cas particulier en hébreu où un nom masculin prend la terminaison ־וֹת- qui est normalement la terminaison féminine."
+
 export const vocabularyNoms: VocabularyEntry[] = [
   { id: '1', french: 'livre', hebrew: 'סֵפֶר', hebrewPlural: 'סְפָרִים', transcription: 'sefer', transcriptionPlural: 'sfarim', category: 'École & Éducation', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '2', french: 'eau', hebrew: 'מַיִם', hebrewPlural: 'מַיִם', transcription: 'mayim', transcriptionPlural: 'mayim', category: 'Nourriture & Boisson', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '3', french: 'pain', hebrew: 'לֶחֶם', hebrewPlural: 'לַחְמַנִיּוֹת', transcription: 'lechem', transcriptionPlural: 'lachmaniyot', category: 'Nourriture & Boisson', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '4', french: 'maison', hebrew: 'בַּיִת', hebrewPlural: 'בָּתִּים', transcription: 'bayit', transcriptionPlural: 'batim', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine' },
+{ id: '3', french: 'pain', hebrew: 'לֶחֶם', hebrewPlural: '-', transcription: 'lechem', transcriptionPlural: '-', category: 'Nourriture & Boisson', partOfSpeech: 'noun', gender: 'masculine' },
+{ id: '4', french: 'maison', hebrew: 'בַּיִת', hebrewPlural: 'בָּתִּים', transcription: 'bayit', transcriptionPlural: 'batim', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_TAV_ENDING_NOTE },
 { id: '5', french: 'porte', hebrew: 'דֶּלֶת', hebrewPlural: 'דְּלָתוֹת', transcription: 'delet', transcriptionPlural: 'delatot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'feminine' },
-{ id: '6', french: 'fenêtre', hebrew: 'חַלּוֹן', hebrewPlural: 'חַלּוֹנוֹת', transcription: 'chalon', transcriptionPlural: 'chalonot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '7', french: 'table', hebrew: 'שֻׁלְחָן', hebrewPlural: 'שֻׁלְחָנוֹת', transcription: 'shulchan', transcriptionPlural: 'shulchanot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '8', french: 'chaise', hebrew: 'כִּסֵּא', hebrewPlural: 'כִּסְאוֹת', transcription: 'kise', transcriptionPlural: 'kise\'ot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine' },
+{ id: '6', french: 'fenêtre', hebrew: 'חַלּוֹן', hebrewPlural: 'חַלּוֹנוֹת', transcription: 'chalon', transcriptionPlural: 'chalonot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_OT_ENDING_NOTE },
+{ id: '7', french: 'table', hebrew: 'שֻׁלְחָן', hebrewPlural: 'שֻׁלְחָנוֹת', transcription: 'shulchan', transcriptionPlural: 'shulchanot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_OT_ENDING_NOTE  },
+{ id: '8', french: 'chaise', hebrew: 'כִּסֵּא', hebrewPlural: 'כִּסְאוֹת', transcription: 'kise', transcriptionPlural: 'kise\'ot', category: 'Maison & Logement', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_OT_ENDING_NOTE  },
 { id: '9', french: 'voiture', hebrew: 'מְכוֹנִית', hebrewPlural: 'מְכוֹנִיּוֹת', transcription: 'mechonit', transcriptionPlural: 'mechoniyot', category: 'Transport', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '10', french: 'rue', hebrew: 'רְחוֹב', hebrewPlural: 'רְחוֹבוֹת', transcription: 'rechov', transcriptionPlural: 'rechovot', category: 'Ville & Environnement', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '11', french: 'ville', hebrew: 'עִיר', hebrewPlural: 'עָרִים', transcription: 'ir', transcriptionPlural: 'arim', category: 'Ville & Environnement', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '12', french: 'pays', hebrew: 'מְדִינָה', hebrewPlural: 'מְדִינוֹת', transcription: 'medina', transcriptionPlural: 'medinot', category: 'Ville & Environnement', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '13', french: 'travail', hebrew: 'עֲבוֹדָה', hebrewPlural: 'עֲבוֹדוֹת', transcription: 'avoda', transcriptionPlural: 'avodot', category: 'Travail & Métiers', partOfSpeech: 'noun', gender: 'feminine' },
-{ id: '14', french: 'argent', hebrew: 'כֶּסֶף', hebrewPlural: 'כְּסָפִים', transcription: 'kesef', transcriptionPlural: 'ksafim', category: 'Économie & Finance', partOfSpeech: 'noun', gender: 'masculine' },
+{ id: '14', french: 'argent', hebrew: 'כֶּסֶף', hebrewPlural: '-', transcription: 'kesef', transcriptionPlural: '-', category: 'Économie & Finance', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '15', french: 'temps', hebrew: 'זְמַן', hebrewPlural: 'זְמַנִּים', transcription: 'zman', transcriptionPlural: 'zmanim', category: 'Temps & Calendrier', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '16', french: 'jour', hebrew: 'יוֹם', hebrewPlural: 'יָמִים', transcription: 'yom', transcriptionPlural: 'yamim', category: 'Temps & Calendrier', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '17', french: 'nuit', hebrew: 'לַיְלָה', hebrewPlural: 'לֵילוֹת', transcription: 'layla', transcriptionPlural: 'leilot', category: 'Temps & Calendrier', partOfSpeech: 'noun', gender: 'masculine' },
@@ -144,9 +151,9 @@ export const vocabularyNoms: VocabularyEntry[] = [
 { id: '135', french: 'porte', hebrew: 'דֶּלֶת', hebrewPlural: 'דְּלָתוֹת', transcription: 'delet', transcriptionPlural: 'delatot', category: 'Maison & Famille', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '136', french: 'vérité', hebrew: 'אֱמֶת', hebrewPlural: 'אֲמִתּוֹת', transcription: 'emet', transcriptionPlural: 'amitot', category: 'Général', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '137', french: 'maison', hebrew: 'בַּיִת', hebrewPlural: 'בָּתִּים', transcription: 'bayit', transcriptionPlural: 'batim', category: 'Maison & Famille', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '138', french: 'olive', hebrew: 'זַיִת', hebrewPlural: 'זֵיתִים', transcription: 'zayit', transcriptionPlural: 'zeitim', category: 'Nourriture & Restaurant', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '139', french: 'mort', hebrew: 'מָוֶת', hebrewPlural: 'מִיתוֹת', transcription: 'mavet', transcriptionPlural: 'mitot', category: 'Général', partOfSpeech: 'noun', gender: 'masculine' },
-{ id: '140', french: 'intersection / carrefour', hebrew: 'צֹמֶת', hebrewPlural: 'צְמָתִים', transcription: 'tzomet', transcriptionPlural: 'tzmatim', category: 'Ville & Lieux', partOfSpeech: 'noun', gender: 'feminine' },
+{ id: '138', french: 'olive', hebrew: 'זַיִת', hebrewPlural: 'זֵיתִים', transcription: 'zayit', transcriptionPlural: 'zeitim', category: 'Nourriture & Restaurant', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_TAV_ENDING_NOTE },
+{ id: '139', french: 'mort', hebrew: 'מָוֶת', hebrewPlural: 'מִיתוֹת', transcription: 'mavet', transcriptionPlural: 'mitot', category: 'Général', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_TAV_ENDING_NOTE },
+{ id: '140', french: 'intersection / carrefour', hebrew: 'צֹמֶת', hebrewPlural: 'צְמָתִים', transcription: 'tzomet', transcriptionPlural: 'tzmatim', category: 'Ville & Lieux', partOfSpeech: 'noun', gender: 'masculine',note:MASCULINE_TAV_ENDING_NOTE },
 { id: '141', french: 'équipe', hebrew: 'קְבוּצָה', hebrewPlural: 'קְבוּצוֹת', transcription: 'kvutza', transcriptionPlural: 'kvutzot', category: 'Sport & Loisirs', partOfSpeech: 'noun', gender: 'feminine' },
 { id: '142', french: 'signe / panneau', hebrew: 'שִׁלְט', hebrewPlural: 'שִׁלְטִים', transcription: 'shilt', transcriptionPlural: 'shiltim', category: 'Ville & Lieux', partOfSpeech: 'noun', gender: 'masculine' },
 { id: '143', french: 'service', hebrew: 'שֵׁרוּת', hebrewPlural: 'שֵׁרוּתִים', transcription: 'sherut', transcriptionPlural: 'sherutim', category: 'Général', partOfSpeech: 'noun', gender: 'masculine' },

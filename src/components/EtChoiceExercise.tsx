@@ -1,8 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { EtChoiceAnswer, EtChoiceExercise as EtChoiceExerciseType } from '../data/et-choice-exercises'
 import '../styles/et-choice.css'
-
-const QUIZ_SIZE = 5
 
 interface EtChoiceExerciseProps {
   exercises: EtChoiceExerciseType[]
@@ -18,81 +16,42 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled
 }
 
-function pickQuizExercises(exercises: EtChoiceExerciseType[], count: number): EtChoiceExerciseType[] {
-  const active = exercises.filter((ex) => ex.active)
-  return shuffleArray(active).slice(0, Math.min(count, active.length))
-}
-
-function blankDisplay(answer: EtChoiceAnswer | null, isAnswered: boolean): string {
-  if (!isAnswered || answer === null) return '___'
-  return answer === 'את' ? 'את' : ''
+function getBlankState(
+  selectedAnswer: EtChoiceAnswer | null,
+  isAnswered: boolean,
+): 'pending' | 'et' | 'hidden' {
+  if (!isAnswered) return 'pending'
+  return selectedAnswer === 'את' ? 'et' : 'hidden'
 }
 
 export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
-  const [quizKey, setQuizKey] = useState(0)
-  const quizItems = useMemo(() => pickQuizExercises(exercises, QUIZ_SIZE), [exercises, quizKey])
+  const quizItems = useMemo(
+    () => shuffleArray(exercises.filter((ex) => ex.active)),
+    [exercises],
+  )
   const [index, setIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<EtChoiceAnswer | null>(null)
-  const [score, setScore] = useState(0)
-  const [isFinished, setIsFinished] = useState(false)
 
   const current = quizItems[index]
   const isAnswered = selectedAnswer !== null
   const isLast = index >= quizItems.length - 1
 
-  const startNewQuiz = useCallback(() => {
-    setQuizKey((key) => key + 1)
-    setIndex(0)
-    setSelectedAnswer(null)
-    setScore(0)
-    setIsFinished(false)
-  }, [])
-
   const handleAnswer = (choice: EtChoiceAnswer) => {
     if (isAnswered || !current) return
     setSelectedAnswer(choice)
-    if (choice === current.answer) {
-      setScore((s) => s + 1)
-    }
   }
 
   const handleNext = () => {
-    if (isLast) {
-      setIsFinished(true)
-    } else {
-      setIndex((i) => i + 1)
-      setSelectedAnswer(null)
-    }
+    if (isLast) return
+    setIndex((i) => i + 1)
+    setSelectedAnswer(null)
   }
 
-  if (exercises.filter((ex) => ex.active).length === 0) {
+  if (quizItems.length === 0) {
     return (
       <div className="et-choice">
         {title && <h2 className="exercise-title">{title}</h2>}
         <p className="exercise-empty">Aucun exercice disponible.</p>
-      </div>
-    )
-  }
-
-  if (isFinished) {
-    return (
-      <div className="et-choice">
-        {title && <h2 className="exercise-title">{title}</h2>}
-        <div className="et-choice-card et-choice-result">
-          <p className="et-choice-result-score">
-            {score} / {quizItems.length}
-          </p>
-          <p className="et-choice-result-message">
-            {score === quizItems.length
-              ? 'Parfait !'
-              : score >= quizItems.length / 2
-                ? 'Bon travail !'
-                : 'Continuez à vous entraîner !'}
-          </p>
-          <button type="button" className="btn btn-primary" onClick={startNewQuiz}>
-            Nouveau quiz
-          </button>
-        </div>
       </div>
     )
   }
@@ -109,24 +68,15 @@ export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
     return `${base} neutral-disabled`
   }
 
-  const blankText = blankDisplay(selectedAnswer, isAnswered)
-  const blankClass =
-    blankText === '' && isAnswered
-      ? 'et-choice-blank et-choice-blank--empty'
-      : 'et-choice-blank'
+  const blankState = getBlankState(selectedAnswer, isAnswered)
 
   return (
     <div className="et-choice">
       {title && <h2 className="exercise-title">{title}</h2>}
 
-      <div className="et-choice-stats">
-        <p className="et-choice-stat">
-          {index + 1} / {quizItems.length}
-        </p>
-        <p className="et-choice-stat">
-          {score} bonne{score !== 1 ? 's' : ''} réponse{score !== 1 ? 's' : ''}
-        </p>
-      </div>
+      <p className="et-choice-stat">
+        {index + 1} / {quizItems.length}
+      </p>
 
       <div
         className={`et-choice-card${
@@ -136,8 +86,21 @@ export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
         <p className="et-choice-instruction">{current.instruction}</p>
 
         <p className="et-choice-sentence" dir="rtl" lang="he">
-          {current.sentence.before}{' '}
-          <span className={blankClass}>{blankText || '\u00a0'}</span>
+          {current.sentence.before}
+          {blankState !== 'hidden' && (
+            <>
+              {' '}
+              <span
+                className={
+                  blankState === 'pending'
+                    ? 'et-choice-blank et-choice-blank--pending'
+                    : 'et-choice-blank et-choice-blank--filled'
+                }
+              >
+                {blankState === 'et' ? 'את' : ''}
+              </span>
+            </>
+          )}
           {current.sentence.after ? ` ${current.sentence.after}` : ''}
         </p>
 
@@ -172,10 +135,10 @@ export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
         </button>
       </div>
 
-      {isAnswered && (
+      {isAnswered && !isLast && (
         <div className="et-choice-nav">
           <button type="button" className="btn btn-primary" onClick={handleNext}>
-            {isLast ? 'Voir le score' : 'Suivant →'}
+            Suivant →
           </button>
         </div>
       )}
