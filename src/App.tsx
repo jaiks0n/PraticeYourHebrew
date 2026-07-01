@@ -1,16 +1,24 @@
 ﻿import { useState } from 'react'
+import { CodeGate } from './components/CodeGate'
 import { CoursEt } from './components/CoursEt'
+import { DevsideFlashcardExercise } from './components/DevsideFlashcardExercise'
+import { DevsideList } from './components/DevsideList'
 import { EtChoiceExercise } from './components/EtChoiceExercise'
 import { NounList } from './components/NounList'
+import { PapaList } from './components/PapaList'
 import { VerbList } from './components/VerbList'
 import { FillBlankExercise } from './components/FillBlankExercise'
 import { FlashcardExercise } from './components/FlashcardExercise'
 import { GenderQuizExercise } from './components/GenderQuizExercise'
 import { Layout } from './components/Layout'
+import { jasonVocabulary } from './data/jason-vovabulary'
 import { etChoiceExercises } from './data/et-choice-exercises'
 import { fillBlankExercises } from './data/fill-blank-exercises'
 import { vocabularyNoms } from './data/vocabulary-noms'
+import { vocabularyPapa } from './data/vocabulary-papa'
 import { vocabulary } from './data/vocabulary-verbes'
+import { useDevsideAccess } from './hooks/useDevsideAccess'
+import './styles/devside.css'
 
 type Page =
   | 'home'
@@ -22,21 +30,53 @@ type Page =
   | 'fill-blank'
   | 'verb-list'
   | 'noun-list'
+  | 'devside-flashcards'
+  | 'devside-list'
+  | 'flashcards-papa'
+  | 'papa-list'
 
-const flashcardLexiques = [
+const lexiqueDecks = [
   {
-    id: 'flashcards-verbs' as const,
-    icon: '🧑🏼‍🏫',
-    name: 'Verbes',
-    cards: vocabulary,
-    title: 'Verbes',
+    flashcard: {
+      id: 'flashcards-verbs' as const,
+      icon: '🧑🏼‍🏫',
+      name: 'Verbes',
+      cards: vocabulary,
+      title: 'Verbes',
+    },
+    list: {
+      id: 'verb-list' as const,
+      name: 'Liste des verbes',
+      countLabel: `${vocabulary.length} verbes`,
+    },
   },
   {
-    id: 'flashcards-noms' as const,
-    icon: '📚',
-    name: 'Noms',
-    cards: vocabularyNoms,
-    title: 'Noms',
+    flashcard: {
+      id: 'flashcards-noms' as const,
+      icon: '📚',
+      name: 'Noms',
+      cards: vocabularyNoms,
+      title: 'Noms',
+    },
+    list: {
+      id: 'noun-list' as const,
+      name: 'Liste des noms',
+      countLabel: `${vocabularyNoms.length} noms`,
+    },
+  },
+  {
+    flashcard: {
+      id: 'flashcards-papa' as const,
+      icon: '🍎',
+      name: 'Papa (aliments)',
+      cards: vocabularyPapa,
+      title: 'Papa (aliments)',
+    },
+    list: {
+      id: 'papa-list' as const,
+      name: 'Liste Papa (aliments)',
+      countLabel: `${vocabularyPapa.length} aliments`,
+    },
   },
 ]
 
@@ -64,10 +104,27 @@ const fillBlankMeta = {
   title: 'Phrases à trou',
 }
 
+const devsideTitle = 'Devside'
+
 function App() {
   const [page, setPage] = useState<Page>('home')
+  const [showCodeModal, setShowCodeModal] = useState(false)
+  const { isUnlocked, unlock } = useDevsideAccess()
 
-  const activeFlashcardLexique = flashcardLexiques.find((lexique) => lexique.id === page)
+  const activeFlashcardLexique = lexiqueDecks.find((deck) => deck.flashcard.id === page)?.flashcard
+  const isDevsidePage = page === 'devside-flashcards' || page === 'devside-list'
+
+  const renderDevsidePage = () => {
+    if (!isUnlocked) {
+      return <CodeGate onUnlock={unlock} />
+    }
+
+    if (page === 'devside-flashcards') {
+      return <DevsideFlashcardExercise key="devside-flashcards" title={devsideTitle} />
+    }
+
+    return <DevsideList key="devside-list" />
+  }
 
   return (
     <Layout
@@ -95,39 +152,59 @@ function App() {
 
           <section className="home-section">
             <h3 className="home-section-title">Lexiques</h3>
-            <div className="exercise-list exercise-list--grid-2">
-              {flashcardLexiques.map((lexique) => (
-                <button
-                  key={lexique.id}
-                  type="button"
-                  className="exercise-card"
-                  onClick={() => setPage(lexique.id)}
-                >
-                  <span className="exercise-card-icon">{lexique.icon}</span>
-                  <span className="exercise-card-name">{lexique.name}</span>
-                  <span className="exercise-card-count">{lexique.cards.length} cartes</span>
-                </button>
+            <div className="lexique-decks">
+              {lexiqueDecks.map((deck) => (
+                <div key={deck.flashcard.id} className="lexique-deck-column">
+                  <button
+                    type="button"
+                    className="exercise-card"
+                    onClick={() => setPage(deck.flashcard.id)}
+                  >
+                    <span className="exercise-card-icon">{deck.flashcard.icon}</span>
+                    <span className="exercise-card-name">{deck.flashcard.name}</span>
+                    <span className="exercise-card-count">{deck.flashcard.cards.length} cartes</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="exercise-card"
+                    onClick={() => setPage(deck.list.id)}
+                  >
+                    <span className="exercise-card-icon">📋</span>
+                    <span className="exercise-card-name">{deck.list.name}</span>
+                    <span className="exercise-card-count">{deck.list.countLabel}</span>
+                  </button>
+                </div>
               ))}
-              <button
-                type="button"
-                className="exercise-card"
-                onClick={() => setPage('verb-list')}
-              >
-                <span className="exercise-card-icon">📋</span>
-                <span className="exercise-card-name">Liste des verbes</span>
-                <span className="exercise-card-count">{vocabulary.length} verbes</span>
-              </button>
-              <button
-                type="button"
-                className="exercise-card"
-                onClick={() => setPage('noun-list')}
-              >
-                <span className="exercise-card-icon">📋</span>
-                <span className="exercise-card-name">Liste des noms</span>
-                <span className="exercise-card-count">{vocabularyNoms.length} noms</span>
-              </button>
             </div>
           </section>
+
+          {isUnlocked && (
+            <section className="home-section">
+              <h3 className="home-section-title">Devside</h3>
+              <div className="lexique-decks">
+                <div className="lexique-deck-column">
+                  <button
+                    type="button"
+                    className="exercise-card"
+                    onClick={() => setPage('devside-flashcards')}
+                  >
+                    <span className="exercise-card-icon">💻</span>
+                    <span className="exercise-card-name">Lexique</span>
+                    <span className="exercise-card-count">{jasonVocabulary.length} cartes</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="exercise-card"
+                    onClick={() => setPage('devside-list')}
+                  >
+                    <span className="exercise-card-icon">📋</span>
+                    <span className="exercise-card-name">Liste</span>
+                    <span className="exercise-card-count">{jasonVocabulary.length} termes</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="home-section">
             <h3 className="home-section-title">Exercices</h3>
@@ -161,6 +238,25 @@ function App() {
               </button>
             </div>
           </section>
+
+          <button
+            type="button"
+            className="devside-entry"
+            onClick={() => {
+              if (isUnlocked) return
+              setShowCodeModal(true)
+            }}
+          >
+            Devside
+          </button>
+
+          {showCodeModal && !isUnlocked && (
+            <CodeGate
+              variant="modal"
+              onUnlock={unlock}
+              onClose={() => setShowCodeModal(false)}
+            />
+          )}
         </div>
       ) : page === 'gender-quiz' ? (
         <GenderQuizExercise
@@ -186,6 +282,10 @@ function App() {
         <VerbList key="verb-list" />
       ) : page === 'noun-list' ? (
         <NounList key="noun-list" />
+      ) : page === 'papa-list' ? (
+        <PapaList key="papa-list" />
+      ) : isDevsidePage ? (
+        renderDevsidePage()
       ) : activeFlashcardLexique ? (
         <FlashcardExercise
           key={activeFlashcardLexique.id}

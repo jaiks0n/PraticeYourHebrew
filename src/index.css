@@ -49,7 +49,7 @@ body {
   align-items: center;
   gap: 1rem;
   width: 100%;
-  max-width: 36rem;
+  max-width: min(56rem, 100%);
 }
 
 .exercise-list {
@@ -79,6 +79,49 @@ body {
 }
 
 .exercise-list--grid-2 .exercise-card-count {
+  font-size: 0.75rem;
+}
+
+.lexique-decks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .lexique-decks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .lexique-decks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lexique-deck-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.lexique-decks .exercise-card {
+  padding: 1rem 0.5rem;
+}
+
+.lexique-decks .exercise-card-icon {
+  font-size: 1.75rem;
+}
+
+.lexique-decks .exercise-card-name {
+  font-size: 0.85rem;
+  line-height: 1.25;
+}
+
+.lexique-decks .exercise-card-count {
   font-size: 0.75rem;
 }
 

@@ -1,0 +1,129 @@
+.devside-entry {
+  margin-top: 1.5rem;
+  padding: 0.35rem 0.75rem;
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #9aa8ba;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.devside-entry:hover {
+  color: #3b6ea5;
+  background: rgba(59, 110, 165, 0.08);
+}
+
+.code-gate-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 24rem;
+}
+
+.code-gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(30, 58, 95, 0.35);
+}
+
+.code-gate-modal {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  padding: 2rem 1.75rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(30, 58, 95, 0.2);
+}
+
+.code-gate-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #6b7c93;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.code-gate-close:hover {
+  background: rgba(59, 110, 165, 0.1);
+  color: #1e3a5f;
+}
+
+.code-gate-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.code-gate-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: center;
+}
+
+.code-gate-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7c93;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.code-gate-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  border: 2px solid #d0dae8;
+  border-radius: 10px;
+  color: #1e3a5f;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.code-gate-input:focus {
+  border-color: #3b6ea5;
+}
+
+.code-gate-input--error {
+  border-color: #c0392b;
+}
+
+.code-gate-error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #c0392b;
+  text-align: center;
+}
+
+.code-gate-submit {
+  margin-top: 0.25rem;
+}
+
+.devside-flip-card-english {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3b6ea5;
+}

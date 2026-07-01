@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { vocabularyNoms } from '../data/vocabulary-noms'
+import { vocabularyPapa } from '../data/vocabulary-papa'
 import { formatHebrewDisplay, formatTranscriptionDisplay } from '../utils/formatNounHebrew'
 import { matchesFrenchSearch } from '../utils/matchesFrenchSearch'
 import { SearchBar } from './SearchBar'
@@ -9,20 +9,20 @@ const GENDER_LABELS = {
   feminine: 'f.',
 } as const
 
-export function NounList() {
+export function PapaList() {
   const [query, setQuery] = useState('')
-  const filtered = vocabularyNoms.filter((noun) => matchesFrenchSearch(query, noun.french))
+  const filtered = vocabularyPapa.filter((item) => matchesFrenchSearch(query, item.french))
 
   return (
     <div className="verb-list">
-      <h2 className="exercise-title">Liste des noms</h2>
+      <h2 className="exercise-title">Papa (aliments)</h2>
       <SearchBar
         value={query}
         onChange={setQuery}
-        placeholder="Rechercher un nom…"
+        placeholder="Rechercher un aliment…"
       />
       {filtered.length === 0 ? (
-        <p className="verb-list-empty">Aucun nom trouvé.</p>
+        <p className="verb-list-empty">Aucun aliment trouvé.</p>
       ) : (
         <table className="verb-list-table">
           <thead>
@@ -34,21 +34,21 @@ export function NounList() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((noun) => (
-              <tr key={noun.id}>
-                <td className="verb-list-num">{noun.id}</td>
+            {filtered.map((item) => (
+              <tr key={item.id}>
+                <td className="verb-list-num">{item.id}</td>
                 <td className="verb-list-french">
-                  {noun.french}
-                  {noun.note && <span className="verb-list-note">{noun.note}</span>}
+                  {item.french}
+                  {item.note && <span className="verb-list-note">{item.note}</span>}
                 </td>
                 <td className="verb-list-infinitive">
                   <span className="verb-list-hebrew" dir="rtl">
-                    {formatHebrewDisplay(noun)}
+                    {formatHebrewDisplay(item)}
                   </span>
-                  <span className="verb-list-transcription">({formatTranscriptionDisplay(noun)})</span>
+                  <span className="verb-list-transcription">({formatTranscriptionDisplay(item)})</span>
                 </td>
                 <td className="verb-list-gender">
-                  {noun.gender ? GENDER_LABELS[noun.gender] : '—'}
+                  {item.gender ? GENDER_LABELS[item.gender] : '—'}
                 </td>
               </tr>
             ))}
