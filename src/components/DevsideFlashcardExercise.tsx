@@ -129,7 +129,7 @@ export function DevsideFlashcardExercise({
       />
 
       <div className="exercise-controls">
-        <button type="button" className="btn btn-secondary btn-with-icon" onClick={handleShuffle} disabled={isNavigating}>
+        <button type="button" className="btn btn-secondary btn-with-icon exercise-shuffle-btn" onClick={handleShuffle} disabled={isNavigating}>
           <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
           Mélanger les cartes
         </button>

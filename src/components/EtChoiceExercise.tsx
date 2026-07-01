@@ -1,19 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import type { EtChoiceAnswer, EtChoiceExercise as EtChoiceExerciseType } from '../data/et-choice-exercises'
+import { shuffleArray } from '../utils/shuffleArray'
+import shuffleIcon from '../assets/shuffle.svg'
 import '../styles/et-choice.css'
 
 interface EtChoiceExerciseProps {
   exercises: EtChoiceExerciseType[]
   title?: string
-}
-
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
 }
 
 function getBlankState(
@@ -25,12 +18,19 @@ function getBlankState(
 }
 
 export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
+  const [quizKey, setQuizKey] = useState(0)
   const quizItems = useMemo(
     () => shuffleArray(exercises.filter((ex) => ex.active)),
-    [exercises],
+    [exercises, quizKey],
   )
   const [index, setIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<EtChoiceAnswer | null>(null)
+
+  const handleShuffle = useCallback(() => {
+    setQuizKey((key) => key + 1)
+    setIndex(0)
+    setSelectedAnswer(null)
+  }, [])
 
   const current = quizItems[index]
   const isAnswered = selectedAnswer !== null
@@ -77,6 +77,15 @@ export function EtChoiceExercise({ exercises, title }: EtChoiceExerciseProps) {
       <p className="et-choice-stat">
         {index + 1} / {quizItems.length}
       </p>
+
+      <button
+        type="button"
+        className="btn btn-secondary btn-with-icon exercise-shuffle-btn"
+        onClick={handleShuffle}
+      >
+        <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
+        Mélanger
+      </button>
 
       <div
         className={`et-choice-card${

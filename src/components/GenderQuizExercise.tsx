@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { NounGender, VocabularyEntry } from '../data/types'
-import { formatHebrewDisplay, formatTranscriptionDisplay } from '../utils/formatNounHebrew'
+import { shuffleArray } from '../utils/shuffleArray'
+import shuffleIcon from '../assets/shuffle.svg'
 import '../styles/gender-quiz.css'
-
 const QUIZ_SIZE = 10
 
 type NounWithGender = VocabularyEntry & { gender: NounGender }
@@ -12,17 +12,7 @@ interface GenderQuizExerciseProps {
   title?: string
 }
 
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
-}
-
-function toQuizWords(entries: VocabularyEntry[]): NounWithGender[] {
-  return entries.filter((entry): entry is NounWithGender => entry.gender != null)
+function toQuizWords(entries: VocabularyEntry[]): NounWithGender[] {  return entries.filter((entry): entry is NounWithGender => entry.gender != null)
 }
 
 function pickQuizWords(words: NounWithGender[], count: number): NounWithGender[] {
@@ -53,6 +43,10 @@ export function GenderQuizExercise({ words, title }: GenderQuizExerciseProps) {
     setScore(0)
     setIsFinished(false)
   }, [])
+
+  const handleShuffle = useCallback(() => {
+    startNewQuiz()
+  }, [startNewQuiz])
 
   const handleAnswer = (gender: NounGender) => {
     if (isAnswered || !currentWord) return
@@ -130,6 +124,15 @@ export function GenderQuizExercise({ words, title }: GenderQuizExerciseProps) {
         </p>
       </div>
 
+      <button
+        type="button"
+        className="btn btn-secondary btn-with-icon exercise-shuffle-btn"
+        onClick={handleShuffle}
+      >
+        <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
+        Mélanger
+      </button>
+
       <div
         className={`gender-quiz-card${
           isAnswered ? (isCorrect ? ' gender-quiz-card--correct' : ' gender-quiz-card--incorrect') : ''
@@ -137,9 +140,9 @@ export function GenderQuizExercise({ words, title }: GenderQuizExerciseProps) {
       >
         <span className="flip-card-label">Hébreu</span>
         <p className="gender-quiz-hebrew" dir="rtl" lang="he">
-          {formatHebrewDisplay(currentWord)}
+          {currentWord.hebrew}
         </p>
-        <p className="gender-quiz-transcription">{formatTranscriptionDisplay(currentWord)}</p>
+        <p className="gender-quiz-transcription">{currentWord.transcription}</p>
 
         {isAnswered && (
           <>

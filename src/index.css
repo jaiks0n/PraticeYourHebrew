@@ -17,19 +17,31 @@ body {
 .header { padding: 2rem 1.5rem 1rem; text-align: center; }
 
 .btn-back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  background: none;
-  border: none;
-  font-size: 0.9rem;
-  color: #3b6ea5;
+  padding: 0.7rem 1.25rem;
+  background: #ffffff;
+  border: 2px solid #3b6ea5;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e3a5f;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.2s;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(59, 110, 165, 0.18);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.1s;
 }
 
-.btn-back:hover { background: rgba(59, 110, 165, 0.1); }
+.btn-back:hover {
+  background: #eef4fb;
+  border-color: #2d5a8a;
+  box-shadow: 0 6px 18px rgba(59, 110, 165, 0.22);
+}
+
+.btn-back:active {
+  transform: scale(0.98);
+}
 
 .site-title { margin: 0; font-size: 1.75rem; font-weight: 800; color: #1e3a5f; }
 .site-subtitle { margin: 0.5rem 0 0; font-size: 1rem; color: #6b7c93; }
@@ -300,6 +312,29 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.exercise-shuffle-btn {
+  align-self: center;
+  min-width: 11rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #ffffff;
+  color: #1e3a5f;
+  border: 2px solid #3b6ea5;
+  box-shadow: 0 4px 14px rgba(59, 110, 165, 0.18);
+}
+
+.exercise-shuffle-btn:hover {
+  background: #eef4fb;
+  border-color: #2d5a8a;
+  box-shadow: 0 6px 18px rgba(59, 110, 165, 0.22);
+}
+
+.exercise-shuffle-btn .btn-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .btn-icon {

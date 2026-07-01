@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { FillBlankExercise as FillBlankExerciseType } from '../data/fill-blank-exercises'
+import { shuffleArray } from '../utils/shuffleArray'
+import shuffleIcon from '../assets/shuffle.svg'
 import '../styles/fill-blank.css'
 
 const QUIZ_SIZE = 5
@@ -7,15 +9,6 @@ const QUIZ_SIZE = 5
 interface FillBlankExerciseProps {
   exercises: FillBlankExerciseType[]
   title?: string
-}
-
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
 }
 
 function pickQuizExercises(exercises: FillBlankExerciseType[], count: number): FillBlankExerciseType[] {
@@ -59,6 +52,10 @@ export function FillBlankExercise({ exercises, title }: FillBlankExerciseProps) 
     setScore(0)
     setIsFinished(false)
   }, [])
+
+  const handleShuffle = useCallback(() => {
+    startNewQuiz()
+  }, [startNewQuiz])
 
   const handleConfirm = () => {
     if (!exercise || checked || !input.trim()) return
@@ -135,6 +132,15 @@ export function FillBlankExercise({ exercises, title }: FillBlankExerciseProps) 
           {score} bonne{score !== 1 ? 's' : ''} réponse{score !== 1 ? 's' : ''}
         </p>
       </div>
+
+      <button
+        type="button"
+        className="btn btn-secondary btn-with-icon exercise-shuffle-btn"
+        onClick={handleShuffle}
+      >
+        <img src={shuffleIcon} alt="" className="btn-icon" width={18} height={18} />
+        Mélanger
+      </button>
 
       <div
         className={`fill-blank-card${
